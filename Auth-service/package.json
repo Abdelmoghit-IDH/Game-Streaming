@@ -4,7 +4,8 @@
   "description": "A user management and authentication for Game streaming platform",
   "main": "src/server/server.js",
   "scripts": {
-    "start": "node src/server/server.js"
+    "start": "node src/server/server.js",
+    "test": "jest"
   },
   "keywords": [
     "authentication",
@@ -33,5 +34,8 @@
     "random-bytes": "1.0.0",
     "sequelize": "6.3.5",
     "tedious": "9.2.1"
+  },
+  "devDependencies": {
+    "jest": "^28.1.0"
   }
 }
