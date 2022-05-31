@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authservice
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: authservice
+  template:
+    metadata:
+      labels:
+        app: authservice
+    spec:
+      containers:
+        - name: service
+          image: mouliehatim/authservice
+          ports:
+            - containerPort: 3001
+          # env:
+          #   - name: PORT
+          #     value: "9555"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: authservice
+spec:
+  selector:
+    app: authservice
+  ports:
+    - port: 3001
+      targetPort: 3001
