@@ -1,8 +1,8 @@
 stages:
   - test
-  - build_backend
-  - build_frontend
+  - build
   - deploy
+  - k8s
 
 variables:
   BACKEND_APP_NAME: auth-image
@@ -14,32 +14,41 @@ variables:
   CD_MANIFEST_FILE: Chart.yaml
   TAG: $CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA
 
+
+
+
+    
+image: docker:latest 
+services:
+  - name: docker:dind
+
 before_script:
   - echo $BACKEND_CI_REGISTRY_IMAGE:$TAG $PWD
-  # login
-  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
-
-after_script:
-  - docker image prune -af
+  - echo $CI_REGISTRY_PASSWORD | docker login --username $CI_REGISTRY_USER --password-stdin
+# after_script:
+#   - docker image prune -af
 
 test_auth:
   stage: test
-  script:
+  image: node:14-alpine
+  before_script:
     - cd Auth-service
+    - npm i
+  script:
+    # - cd Auth-service
     - npm test
     - cd ..
 
 build_backend_image:
-  stage: build_backend
+  stage: build
   script:
-    # Docker Build && Push image
     - cd Auth-service
     - cat Dockerfile
     - docker build --tag $BACKEND_CI_REGISTRY_IMAGE:$TAG .
     - docker push $BACKEND_CI_REGISTRY_IMAGE:$TAG
 
 build_frontend_image:
-  stage: build_frontend
+  stage: build
   script:
     # Docker Build && Push image
     - cd Front-end
@@ -58,4 +67,41 @@ tag_latest_image:
     - docker pull $FRONTEND_CI_REGISTRY_IMAGE:$TAG
     - docker tag $FRONTEND_CI_REGISTRY_IMAGE:$TAG $FRONTEND_CI_REGISTRY_IMAGE:latest
     - docker push $FRONTEND_CI_REGISTRY_IMAGE:latest
+
+
+update:
+  stage: k8s
+  before_script:
+    - apt-get update -y && apt-get install -yqqf openssh-client git unzip sshpass rsync --fix-missing
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval `ssh-agent -s`
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+    - git config --global user.email "$CI_EMAIL"
+    - git config --global user.name "$CI_USERNAME"
+  script:
+    - echo 'test file'
+    - cat variable-gitlab
+    - export SHORT_SHA=$(cat variable-gitlab)
+    - ssh -T git@gitlab.com
+    - git clone git@gitlab.com:<repo>
+    - cd development/k8s-services/
+    #test these in the ui first
+    - cat ui-service.yaml
+    - sed -i "s/auth-image:.*/auth-image:$TAG/g" ui-service.yaml
+    - cat ui-service.yaml
+
+    # - cd simplehello-argo
+    # - cp baseline/depl.yaml baseline/depl-1.yaml
+    # - sed -i "s/COMMIT_SHA/$SHORT_SHA/g" baseline/depl-1.yaml
+    # - cp baseline/depl-1.yaml app/depl.yaml
+    # - cat app/depl.yaml
+    # - cat baseline/depl-1.yaml
+    - git add -A
+    - git commit -m "test push gitlab"
+    - git remote add gitlab git@gitlab.com:<repo>
+    - git push gitlab main 
 
