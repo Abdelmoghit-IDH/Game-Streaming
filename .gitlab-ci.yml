@@ -90,6 +90,7 @@ update:
     - export TAG=abdelmoghit-39a61491
     - ssh -T git@gitlab.com
     - git clone git@gitlab.com:abdelmoghit.idhsaine/Game-Streaming-Deployment.git
+    - ls
     - cd development/k8s-services/
     #test these in the ui first
     - cat ui-service.yaml
