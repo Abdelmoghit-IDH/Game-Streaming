@@ -14,38 +14,34 @@ variables:
   CD_MANIFEST_FILE: Chart.yaml
   TAG: $CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA
 
-  # DOCKER_HOST: tcp://docker:2375/
-  # DOCKER_DRIVER: overlay2
-  #   # See https://github.com/docker-library/docker/pull/166
-  # DOCKER_TLS_CERTDIR: ""
 
 
 
-
-      # entrypoint: ["env", "-u", "DOCKER_HOST"]
-      # command: ["dockerd-entrypoint.sh"]
     
+image: docker:latest 
+services:
+  - name: docker:dind
 
-# before_script:
-  
+before_script:
+  - echo $BACKEND_CI_REGISTRY_IMAGE:$TAG $PWD
+  - echo $CI_REGISTRY_PASSWORD | docker login --username $CI_REGISTRY_USER --password-stdin
 # after_script:
 #   - docker image prune -af
 
 test_auth:
   stage: test
-  image: docker:latest 
-  services:
-    - name: docker:dind
+  
   script:
     # Docker Build && Push image
-    - echo $BACKEND_CI_REGISTRY_IMAGE:$TAG $PWD
+    # - echo $BACKEND_CI_REGISTRY_IMAGE:$TAG $PWD
   # login
   # - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
     # - echo "$CI_REGISTRY_PASSWORD" | docker login $BACKEND_CI_REGISTRY_IMAGE --username $CI_REGISTRY_USER --password-stdin
-    - echo $CI_REGISTRY_PASSWORD | docker login --username $CI_REGISTRY_USER --password-stdin
+    # - echo $CI_REGISTRY_PASSWORD | docker login --username $CI_REGISTRY_USER --password-stdin
     # - cd Auth-service
     # - npm test
     # - cd ..
+    -echo walouuuuuuuuuuuuuuu
 
 build_backend_image:
   stage: build
