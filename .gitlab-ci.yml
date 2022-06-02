@@ -7,7 +7,7 @@ stages:
 variables:
   BACKEND_APP_NAME: auth-image
   FRONTEND_APP_NAME: ui-image
-  BACKEND_CI_REGISTRY_IMAGE: prankster08/$BACKEND_APP_NAME
+  BACKEND_CI_REGISTRY_IMAGE: docler/prankster08/$BACKEND_APP_NAME
   FRONTEND_CI_REGISTRY_IMAGE: prankster08/$FRONTEND_APP_NAME
   CD_CHART_REPO: Game-Streaming
   CD_GIT_REPOSITORY: git@gitlab.com:abdelmoghit.idhsaine/$CD_CHART_REPO.git
