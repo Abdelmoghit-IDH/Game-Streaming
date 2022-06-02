@@ -107,5 +107,5 @@ update:
     - git add -A
     - git commit -m "test push gitlab"
     # - git remote add gitlab git@gitlab.com:<repo>
-    - git push gitlab  
+    - git push   
 
