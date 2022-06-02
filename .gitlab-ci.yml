@@ -28,45 +28,45 @@ before_script:
 # after_script:
 #   - docker image prune -af 
 
-test_auth:
-  stage: test
-  image: node:14-alpine
-  before_script:
-    - cd Auth-service
-    - npm i
-  script:
-    # - cd Auth-service
-    - npm test
-    - cd ..
+# test_auth:
+#   stage: test
+#   image: node:14-alpine
+#   before_script:
+#     - cd Auth-service
+#     - npm i
+#   script:
+#     # - cd Auth-service
+#     - npm test
+#     - cd ..
 
-build_backend_image:
-  stage: build
-  script:
-    - cd Auth-service
-    - cat Dockerfile
-    - docker build --tag $BACKEND_CI_REGISTRY_IMAGE:$TAG .
-    - docker push $BACKEND_CI_REGISTRY_IMAGE:$TAG
+# build_backend_image:
+#   stage: build
+#   script:
+#     - cd Auth-service
+#     - cat Dockerfile
+#     - docker build --tag $BACKEND_CI_REGISTRY_IMAGE:$TAG .
+#     - docker push $BACKEND_CI_REGISTRY_IMAGE:$TAG
 
-build_frontend_image:
-  stage: build
-  script:
-    # Docker Build && Push image
-    - cd Front-end
-    - cat Dockerfile
-    - docker build --tag $FRONTEND_CI_REGISTRY_IMAGE:$TAG .
-    - docker push $FRONTEND_CI_REGISTRY_IMAGE:$TAG
+# build_frontend_image:
+#   stage: build
+#   script:
+#     # Docker Build && Push image
+#     - cd Front-end
+#     - cat Dockerfile
+#     - docker build --tag $FRONTEND_CI_REGISTRY_IMAGE:$TAG .
+#     - docker push $FRONTEND_CI_REGISTRY_IMAGE:$TAG
 
-tag_latest_image:
-  stage: deploy
-  variables:
-    GIT_STRATEGY: none
-  script:
-    - docker pull $BACKEND_CI_REGISTRY_IMAGE:$TAG
-    - docker tag $BACKEND_CI_REGISTRY_IMAGE:$TAG $BACKEND_CI_REGISTRY_IMAGE:latest
-    - docker push $BACKEND_CI_REGISTRY_IMAGE:latest
-    - docker pull $FRONTEND_CI_REGISTRY_IMAGE:$TAG
-    - docker tag $FRONTEND_CI_REGISTRY_IMAGE:$TAG $FRONTEND_CI_REGISTRY_IMAGE:latest
-    - docker push $FRONTEND_CI_REGISTRY_IMAGE:latest
+# tag_latest_image:
+#   stage: deploy
+#   variables:
+#     GIT_STRATEGY: none
+#   script:
+#     - docker pull $BACKEND_CI_REGISTRY_IMAGE:$TAG
+#     - docker tag $BACKEND_CI_REGISTRY_IMAGE:$TAG $BACKEND_CI_REGISTRY_IMAGE:latest
+#     - docker push $BACKEND_CI_REGISTRY_IMAGE:latest
+#     - docker pull $FRONTEND_CI_REGISTRY_IMAGE:$TAG
+#     - docker tag $FRONTEND_CI_REGISTRY_IMAGE:$TAG $FRONTEND_CI_REGISTRY_IMAGE:latest
+#     - docker push $FRONTEND_CI_REGISTRY_IMAGE:latest
 
 
 update:
