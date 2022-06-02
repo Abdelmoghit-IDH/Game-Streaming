@@ -80,6 +80,7 @@ update:
     - chmod 700 ~/.ssh
     - ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
+    - apk add git
     - git config --global user.email "$CI_EMAIL"
     - git config --global user.name "$CI_USERNAME"
   script:
