@@ -26,7 +26,7 @@ before_script:
   - echo $BACKEND_CI_REGISTRY_IMAGE:$TAG $PWD
   - echo $CI_REGISTRY_PASSWORD | docker login --username $CI_REGISTRY_USER --password-stdin
 # after_script:
-#   - docker image prune -af
+#   - docker image prune -af 
 
 test_auth:
   stage: test
