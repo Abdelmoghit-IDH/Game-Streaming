@@ -7,7 +7,7 @@ const apiPaths = {
   login: '/signin',
   logout: '/logout',
   updateUser: '/update',
-  deleteUser: '/user',
+  deleteUser: '/delete',
 };
 
 const pathKeys = Object.keys(apiPaths).reduce((ret, key) => {
