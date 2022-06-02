@@ -1,7 +1,7 @@
 stages:
-  # - test
-  # - build
-  # - deploy
+  - test
+  - build
+  - deploy
   - k8s
 
 variables:
@@ -25,48 +25,48 @@ services:
 before_script:
   - echo $BACKEND_CI_REGISTRY_IMAGE:$TAG $PWD
   - echo $CI_REGISTRY_PASSWORD | docker login --username $CI_REGISTRY_USER --password-stdin
-# after_script:
-#   - docker image prune -af 
 
-# test_auth:
-#   stage: test
-#   image: node:14-alpine
-#   before_script:
-#     - cd Auth-service
-#     - npm i
-#   script:
-#     # - cd Auth-service
-#     - npm test
-#     - cd ..
+after_script:
+  - docker image prune -af 
 
-# build_backend_image:
-#   stage: build
-#   script:
-#     - cd Auth-service
-#     - cat Dockerfile
-#     - docker build --tag $BACKEND_CI_REGISTRY_IMAGE:$TAG .
-#     - docker push $BACKEND_CI_REGISTRY_IMAGE:$TAG
+test_auth:
+  stage: test
+  image: node:14-alpine
+  before_script:
+    - cd Auth-service
+    - npm i
+  script:
+    # - cd Auth-service
+    - npm test
+    - cd ..
 
-# build_frontend_image:
-#   stage: build
-#   script:
-#     # Docker Build && Push image
-#     - cd Front-end
-#     - cat Dockerfile
-#     - docker build --tag $FRONTEND_CI_REGISTRY_IMAGE:$TAG .
-#     - docker push $FRONTEND_CI_REGISTRY_IMAGE:$TAG
+build_backend_image:
+  stage: build
+  script:
+    - cd Auth-service
+    - cat Dockerfile
+    - docker build --tag $BACKEND_CI_REGISTRY_IMAGE:$TAG .
+    - docker push $BACKEND_CI_REGISTRY_IMAGE:$TAG
 
-# tag_latest_image:
-#   stage: deploy
-#   variables:
-#     GIT_STRATEGY: none
-#   script:
-#     - docker pull $BACKEND_CI_REGISTRY_IMAGE:$TAG
-#     - docker tag $BACKEND_CI_REGISTRY_IMAGE:$TAG $BACKEND_CI_REGISTRY_IMAGE:latest
-#     - docker push $BACKEND_CI_REGISTRY_IMAGE:latest
-#     - docker pull $FRONTEND_CI_REGISTRY_IMAGE:$TAG
-#     - docker tag $FRONTEND_CI_REGISTRY_IMAGE:$TAG $FRONTEND_CI_REGISTRY_IMAGE:latest
-#     - docker push $FRONTEND_CI_REGISTRY_IMAGE:latest
+build_frontend_image:
+  stage: build
+  script:
+    - cd Front-end
+    - cat Dockerfile
+    - docker build --tag $FRONTEND_CI_REGISTRY_IMAGE:$TAG .
+    - docker push $FRONTEND_CI_REGISTRY_IMAGE:$TAG
+
+tag_latest_image:
+  stage: deploy
+  variables:
+    GIT_STRATEGY: none
+  script:
+    - docker pull $BACKEND_CI_REGISTRY_IMAGE:$TAG
+    - docker tag $BACKEND_CI_REGISTRY_IMAGE:$TAG $BACKEND_CI_REGISTRY_IMAGE:latest
+    - docker push $BACKEND_CI_REGISTRY_IMAGE:latest
+    - docker pull $FRONTEND_CI_REGISTRY_IMAGE:$TAG
+    - docker tag $FRONTEND_CI_REGISTRY_IMAGE:$TAG $FRONTEND_CI_REGISTRY_IMAGE:latest
+    - docker push $FRONTEND_CI_REGISTRY_IMAGE:latest
 
 
 update:
@@ -85,27 +85,23 @@ update:
     - git config --global user.name "$CI_USERNAME"
   script:
     - echo 'test file'
-    # - cat variable-gitlab
-    # - export SHORT_SHA=$(cat variable-gitlab)
-    - export TAG=abdelmoghit-39a61491
+    # - export TAG=abdelmoghit-39a61491
     - ssh -T git@gitlab.com
     - cd ..
     - git clone git@gitlab.com:abdelmoghit.idhsaine/Game-Streaming-Deployment.git
     - ls
     - cd Game-Streaming-Deployment/development/k8s-services/
     #test these in the ui first
+    - echo llllllllllllllllll
     - cat ui-service.yaml
-    - sed -i "s/auth-image:.*/auth-image:$TAG/g" ui-service.yaml
+    - sed -i "s/ui-image:.*/ui-image:$TAG/g" ui-service.yaml
     - cat ui-service.yaml
-
-    # - cd simplehello-argo
-    # - cp baseline/depl.yaml baseline/depl-1.yaml
-    # - sed -i "s/COMMIT_SHA/$SHORT_SHA/g" baseline/depl-1.yaml
-    # - cp baseline/depl-1.yaml app/depl.yaml
-    # - cat app/depl.yaml
-    # - cat baseline/depl-1.yaml
+    - echo llllllllllllllllll
+    - cat auth-service.yaml
+    - sed -i "s/auth-image:.*/auth-image:$TAG/g" auth-service.yaml
+    - cat auth-service.yaml
+    - echo llllllllllllllllll
     - git add -A
     - git commit -m "test push gitlab"
-    # - git remote add gitlab git@gitlab.com:<repo>
     - git push   
 
