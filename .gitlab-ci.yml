@@ -106,6 +106,6 @@ update:
     # - cat baseline/depl-1.yaml
     - git add -A
     - git commit -m "test push gitlab"
-    - git remote add gitlab git@gitlab.com:<repo>
-    - git push gitlab main 
+    # - git remote add gitlab git@gitlab.com:<repo>
+    - git push gitlab  
 
