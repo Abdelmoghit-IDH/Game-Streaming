@@ -85,7 +85,7 @@ update:
     - git config --global user.name "$CI_USERNAME"
   script:
     - echo 'test file'
-    - cat variable-gitlab
+    # - cat variable-gitlab
     # - export SHORT_SHA=$(cat variable-gitlab)
     - export TAG=abdelmoghit-39a61491
     - ssh -T git@gitlab.com
