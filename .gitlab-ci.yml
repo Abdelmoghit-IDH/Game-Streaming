@@ -40,9 +40,9 @@ test_auth:
     # Docker Build && Push image
     - echo $BACKEND_CI_REGISTRY_IMAGE:$TAG $PWD
   # login
-  # - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
     # - echo "$CI_REGISTRY_PASSWORD" | docker login $BACKEND_CI_REGISTRY_IMAGE --username $CI_REGISTRY_USER --password-stdin
-    - echo "$CI_REGISTRY_PASSWORD" | docker login --username $CI_REGISTRY_USER --password-stdin
+    # - echo "$CI_REGISTRY_PASSWORD" | docker login --username $CI_REGISTRY_USER --password-stdin
     - cd Auth-service
     - npm test
     - cd ..
