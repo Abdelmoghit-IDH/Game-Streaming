@@ -1,0 +1,11 @@
+# Dependency directory
+node_modules
+
+# production
+/build
+
+# misc
+.env
+.data
+.DS_Store
+.markdown-viewer

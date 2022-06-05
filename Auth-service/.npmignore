@@ -1,0 +1,12 @@
+.nyc_output/
+coverage/
+examples/
+tests/
+test-directory/
+.env
+.editorconfig
+.npmignore
+.travis.yml
+.markdown-viewer
+appveyor.yml
+CONTRIBUTING.md
