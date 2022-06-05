@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import logo from "./IconTwitch.svg";
 import search from "./Search.svg";
 import menuico from "./MenuIco.svg";
 import cross from "./Cross.svg";
 import { Link } from "react-router-dom";
-import { Button } from "reactstrap";
 
 function Header() {
   // states / setters - destructuring
   const [menu, showMenu] = useState(false); // used for responsive menu
   const [smallScreen, setSmallScreen] = useState(false); // to test screen size
   const [searchInput, setSearch] = useState("");
-  let history = useHistory();
 
   // test if we > || < 900px
   useEffect(() => {
@@ -44,10 +41,6 @@ function Header() {
   const handleKeyPress = (e) => {
     setSearch(e.target.value);
   };
-
-  function handleButtonClick() {
-    history.push("/sign-up");
-  }
 
   return (
     <>
@@ -94,14 +87,6 @@ function Header() {
                   </button>
                 </Link>
               </form>
-            </li>
-            <li onClick={hideMenu} className="linkNav">
-              <Link className="link" to="/sign-in">
-                Log In
-              </Link>
-            </li>
-            <li onClick={hideMenu} className="linkNav">
-              <Button onClick={handleButtonClick} className="btn-icon btn-3" size="sm" color="primary" >Sign Up</Button>
             </li>
           </ul>
         )}

@@ -1,3 +1,4 @@
+
 * {
   margin: 0;
   padding: 0;
@@ -367,8 +368,19 @@ body {
   overflow-x: hidden;
   padding-top: 50px;
   padding-left: 239px;
+  
 }
-
+.player{
+  padding-top:70px;
+  padding-left: 250px;
+  left: 0px;
+  width: 60% ; 
+}
+@media screen and (max-width: 1200px) {
+  .player {
+    padding-left: 20px;
+  }
+}
 .contInfo {
   color: #19171c;
   display: grid;
@@ -376,6 +388,7 @@ body {
   width: calc(100% - 340px); /* we remove chat size */
   grid-template: repeat(3, 35px) / 1fr 1fr; /* 3 rows 35px, 2 col sharing available space*/
   margin-top: 5px;
+  font-weight: bold;
 }
 
 .titleStream {
@@ -384,6 +397,7 @@ body {
   margin-left: 5px;
   font-weight: 400;
   font-size: 20px;
+  font-weight: bold;
 }
 
 .viewer {
@@ -392,6 +406,7 @@ body {
   color: crimson;
   font-weight: 700;
   margin: 3px 5px 0 0;
+  font-weight: bold;
 }
 
 .gameInfo {
@@ -400,6 +415,8 @@ body {
   margin-left: 5px;
   font-weight: 400;
   font-size: 20px;
+  font-weight: bold;
+  font-weight: bold;
 }
 
 .gameName {
@@ -407,6 +424,7 @@ body {
   text-align: left;
   margin-left: 5px;
   font-weight: 400;
+  font-weight: bold;
   font-size: 20px;
 }
 
@@ -589,58 +607,8 @@ body {
  padding-top: 50px;
 }
 
+
+.myplayer{
+  padding-top: 50px;
+}
 /* \ RESULTS component */
-
-
-h1,h2,h3,h4,h5,h6,label,span {
-  font-weight: 500;
-  font-family: 'Fira Sans', sans-serif;
-}
-body, html, .App, #root, .auth-wrapper {
-  width: 100%;
-  height: 100%;
-}
-.navbar-light {
-  background-color: #ffffff;
-  box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
-}
-.auth-wrapper {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  text-align: left;
-}
-.auth-inner {
-  width: 450px;
-  margin: auto;
-  background: #ffffff;
-  box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
-  padding: 40px 55px 45px 55px;
-  border-radius: 15px;
-  transition: all .3s;
-}
-.auth-wrapper .form-control:focus {
-  border-color: #167bff;
-  box-shadow: none;
-}
-.auth-wrapper h3 {
-  text-align: center;
-  margin: 0;
-  line-height: 1;
-  padding-bottom: 20px;
-}
-.custom-control-label {
-  font-weight: 400;
-}
-.forgot-password,
-.forgot-password a {
-  text-align: right;
-  font-size: 13px;
-  padding-top: 10px;
-  color: #7f7d7d;
-  margin: 0;
-}
-.forgot-password a {
-  color: #167bff;
-}
-
