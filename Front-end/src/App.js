@@ -10,17 +10,22 @@ import Login from "./pages/signin";
 import SignUp from "./pages/signup";
 // import Player from "./components/TheProfile/profile";
 import Check from "./components/player/Check";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  Route,
+  Switch,
+  useLocation,
+} from "react-router-dom";
 
 function App() {
-  
+  const location = useLocation().pathname;
+  const toOverride = ["sign-in", "sign-up", "profile"];
 
   return (
-    <Router>
       <div className="App">
-        
-        <Header />
-        <Sidebar />
+        {/* Fixed */}
+        {!new RegExp(toOverride.join("|")).test(location) && <Header />}
+        {!new RegExp(toOverride.join("|")).test(location) && <Sidebar />}
+        {/* \ Fixed */}
         <Switch>
           <Route exact path="/" component={Games} />
           <Route exact path="/top-streams" component={TopStreams} />
@@ -33,7 +38,6 @@ function App() {
           <Route exact path="/sign-up/" component={SignUp} />
         </Switch>
       </div>
-    </Router>
   );
 }
 
