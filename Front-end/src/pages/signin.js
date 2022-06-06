@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import AuthContext from "../context/AuthProvider";
 import axios from "../api/axios";
+import { useDispatch } from "react-redux";
 
 const SIGN_IN_URL = "/signin";
 
@@ -13,17 +13,40 @@ export default function Login() {
   const [success, setSuccess] = useState(false);
   const [errMsg, setErrMsg] = useState("");
 
-  const { setAuth } = useContext(AuthContext);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log(formErrors);
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+      console.log(formValues);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [formErrors]);
+
+  useEffect(() => {
+    setErrMsg("");
+  }, [formValues.username, formValues.password]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
   };
 
+  const validate = (values) => {
+    const errors = {};
+    if (!values.username) {
+      errors.username = "Username is required!";
+    }
+    if (!values.password) {
+      errors.password = "Password is required!";
+    } else if (values.password.length < 4) {
+      errors.password = "Password must be more than 4 characters";
+    }
+    return errors;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    console.log(setAuth);
 
     setFormErrors(validate(formValues));
     setIsSubmit(true);
@@ -42,8 +65,14 @@ export default function Login() {
       );
       console.log(JSON.stringify(response?.data));
 
+      const userData = JSON.parse(response?.data["data"]?.user);
+
+      console.log(userData);
+
       //const accessToken = response?.data["data"]?.authorization['token'];
       //console.log(accessToken);
+
+      dispatch(login({}));
 
       setSuccess(true);
       setErrMsg("");
@@ -61,31 +90,6 @@ export default function Login() {
     }
   };
 
-  useEffect(() => {
-    console.log(formErrors);
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
-      console.log(formValues);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formErrors]);
-
-  useEffect(() => {
-    setErrMsg("");
-  }, [formValues.username, formValues.password]);
-
-  const validate = (values) => {
-    const errors = {};
-    if (!values.username) {
-      errors.username = "Username is required!";
-    }
-    if (!values.password) {
-      errors.password = "Password is required!";
-    } else if (values.password.length < 4) {
-      errors.password = "Password must be more than 4 characters";
-    }
-    return errors;
-  };
-
   return (
     <>
       {success ? (
@@ -93,7 +97,7 @@ export default function Login() {
           <h1>You are logged in!</h1>
           <br />
           <p>
-            <Link to="/abou">Go to Home</Link>
+            <Link to="/">Go to Home</Link>
           </p>
         </section>
       ) : (
