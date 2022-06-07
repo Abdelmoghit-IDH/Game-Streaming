@@ -54,6 +54,7 @@ export default function Login() {
             lastname: user.lastname,
             fullname: user.fullname,
             username: user.username,
+            email: user.email,
             signupDate: user.signupDate,
             isAdmin: user.isAdmin,
             token: token,

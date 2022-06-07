@@ -10,10 +10,10 @@ import Login from "./components/Account/signin";
 import SignUp from "./components/Account/signup";
 import { ChakraProvider } from "@chakra-ui/react";
 import { theme } from "./theme";
-import Cover from "./components/Profile/Cover";
-import Main from "./components/Profile/Main";
 import Check from "./components/player/Check";
 import { Route, Switch, useLocation } from "react-router-dom";
+import { ProtectedRoute } from "./components/protected-route";
+import Profile from "./components/Profile/Profile";
 
 function App() {
   const location = useLocation().pathname;
@@ -36,10 +36,7 @@ function App() {
         <Route exact path="/sign-in/" component={Login} />
         <Route exact path="/sign-up/" component={SignUp} />
         <ChakraProvider theme={theme}>
-          <Route path="/profile" exact>
-            <Cover />
-            <Main />
-          </Route>
+          <ProtectedRoute exact path="/profile" component={Profile} />
         </ChakraProvider>
       </Switch>
     </div>
