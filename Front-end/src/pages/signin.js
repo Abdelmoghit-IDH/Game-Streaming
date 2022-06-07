@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "../api/axios";
 import { useDispatch } from "react-redux";
+import { login } from "../features/userSlice";
 
 const SIGN_IN_URL = "/signin";
 
@@ -15,34 +16,9 @@ export default function Login() {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log(formErrors);
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
-      console.log(formValues);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formErrors]);
-
-  useEffect(() => {
-    setErrMsg("");
-  }, [formValues.username, formValues.password]);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
-  };
-
-  const validate = (values) => {
-    const errors = {};
-    if (!values.username) {
-      errors.username = "Username is required!";
-    }
-    if (!values.password) {
-      errors.password = "Password is required!";
-    } else if (values.password.length < 4) {
-      errors.password = "Password must be more than 4 characters";
-    }
-    return errors;
   };
 
   const handleSubmit = async (e) => {
@@ -51,28 +27,41 @@ export default function Login() {
     setFormErrors(validate(formValues));
     setIsSubmit(true);
 
-    const login = formValues.username;
+    const username = formValues.username;
     const password = formValues.password;
 
     try {
       const response = await axios.post(
         SIGN_IN_URL,
-        JSON.stringify({ login, password }),
+        JSON.stringify({ login: username, password }),
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: false,
         }
       );
-      console.log(JSON.stringify(response?.data));
 
-      const userData = JSON.parse(response?.data["data"]?.user);
+      const resData = response?.data["data"];
+      const user = resData?.user;
+      // Get the value of token without Bearer word
+      let token = resData?.authorization["token"];
+      token = token.replace("Bearer", "").replaceAll(" ", "");
 
-      console.log(userData);
-
-      //const accessToken = response?.data["data"]?.authorization['token'];
-      //console.log(accessToken);
-
-      dispatch(login({}));
+      try {
+        dispatch(
+          login({
+            firstname: user.firstname,
+            lastname: user.lastname,
+            fullname: user.fullname,
+            username: user.username,
+            signupDate: user.signupDate,
+            isAdmin: user.isAdmin,
+            token: token,
+            isLoggedIn: true,
+          })
+        );
+      } catch (error) {
+        console.log(error);
+      }
 
       setSuccess(true);
       setErrMsg("");
@@ -88,6 +77,31 @@ export default function Login() {
         setErrMsg("Login Failed");
       }
     }
+  };
+
+  useEffect(() => {
+    console.log(formErrors);
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+      console.log(formValues);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [formErrors]);
+
+  useEffect(() => {
+    setErrMsg("");
+  }, [formValues.username, formValues.password]);
+
+  const validate = (values) => {
+    const errors = {};
+    if (!values.username) {
+      errors.username = "Username is required!";
+    }
+    if (!values.password) {
+      errors.password = "Password is required!";
+    } else if (values.password.length < 4) {
+      errors.password = "Password must be more than 4 characters";
+    }
+    return errors;
   };
 
   return (
