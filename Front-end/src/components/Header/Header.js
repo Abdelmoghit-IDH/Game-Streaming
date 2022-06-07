@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import logo from "./IconTwitch.svg";
 import search from "./Search.svg";
 import menuico from "./MenuIco.svg";
 import cross from "./Cross.svg";
-import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
 
 function Header() {
