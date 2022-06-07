@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
-import axios from "../../api/axios";
+import axios from "../../api/auth-api";
 
 const SIGN_UP_URL = "/signup";
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;

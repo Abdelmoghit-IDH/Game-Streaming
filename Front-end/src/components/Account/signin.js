@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import axios from "../../api/axios";
+import axios from "../../api/auth-api";
 import { useDispatch } from "react-redux";
 import { signin } from "../../features/userSlice";
 
@@ -54,6 +54,7 @@ export default function Login() {
             lastname: user.lastname,
             fullname: user.fullname,
             username: user.username,
+            email: user.email,
             signupDate: user.signupDate,
             isAdmin: user.isAdmin,
             token: token,
