@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
+import { selectUser } from "../../features/userSlice";
+import { useSelector } from "react-redux";
 import logo from "./IconTwitch.svg";
 import search from "./Search.svg";
 import menuico from "./MenuIco.svg";
 import cross from "./Cross.svg";
-import { Button } from "reactstrap";
+import ProfileButton from "./navbar-profile-button/navbar-profile-button";
+import AuthButtons from "./navbar-auth-buttons/navbar-auth-button";
 
 function Header() {
   // states / setters - destructuring
@@ -12,6 +15,8 @@ function Header() {
   const [smallScreen, setSmallScreen] = useState(false); // to test screen size
   const [searchInput, setSearch] = useState("");
   let history = useHistory();
+
+  const user = useSelector(selectUser);
 
   // test if we > || < 900px
   useEffect(() => {
@@ -94,14 +99,14 @@ function Header() {
                 </Link>
               </form>
             </li>
-            <li onClick={hideMenu} className="linkNav">
-              <Link className="link" to="/sign-in">
-                Log In
-              </Link>
-            </li>
-            <li onClick={hideMenu} className="linkNav">
-              <Button onClick={handleButtonClick} className="btn-icon btn-3" size="sm" color="primary" >Sign Up</Button>
-            </li>
+            {user ? (
+              <ProfileButton hideMenu={hideMenu} />
+            ) : (
+              <AuthButtons
+                hideMenu={hideMenu}
+                buttonClick={handleButtonClick}
+              />
+            )}
           </ul>
         )}
         {/* \ Conditionnal rendering for menu */}

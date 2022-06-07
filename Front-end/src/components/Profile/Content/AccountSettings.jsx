@@ -1,6 +1,11 @@
 import { FormControl, FormLabel, Grid, Input, Select } from '@chakra-ui/react'
+import { useSelector } from "react-redux";
+import { selectUser } from '../../../features/userSlice';
 
 function AccountSettings() {
+
+  const user = useSelector(selectUser);
+
   return (
     <Grid
       templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }}
@@ -8,11 +13,11 @@ function AccountSettings() {
     >
       <FormControl id="firstName">
         <FormLabel>First Name</FormLabel>
-        <Input focusBorderColor="brand.blue" type="text" placeholder="Tim" />
+        <Input focusBorderColor="brand.blue" type="text" placeholder={user.firstname} />
       </FormControl>
       <FormControl id="lastName">
         <FormLabel>Last Name</FormLabel>
-        <Input focusBorderColor="brand.blue" type="text" placeholder="Cook" />
+        <Input focusBorderColor="brand.blue" type="text" placeholder={user.lastname} />
       </FormControl>
       <FormControl id="phoneNumber">
         <FormLabel>Phone Number</FormLabel>
@@ -27,7 +32,7 @@ function AccountSettings() {
         <Input
           focusBorderColor="brand.blue"
           type="email"
-          placeholder="tcook@apple.com"
+          placeholder={user.email}
         />
       </FormControl>
       <FormControl id="city">

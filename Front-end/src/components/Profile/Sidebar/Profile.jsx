@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef } from 'react';
 import {
   Avatar,
   AvatarBadge,
@@ -16,7 +16,9 @@ import {
   Text,
   useDisclosure,
   VStack,
-} from '@chakra-ui/react'
+} from '@chakra-ui/react';
+import { useSelector } from "react-redux";
+import { selectUser } from '../../../features/userSlice';
 
 function Profile() {
   const [userProfile, setUserProfile] = useState(null)
@@ -27,6 +29,8 @@ function Profile() {
   const openChooseImage = () => {
     profileImage.current.click()
   }
+
+  const user = useSelector(selectUser);
 
   const changeProfileImage = event => {
     const ALLOWED_TYPES = ['image/png', 'image/jpeg', 'image/jpg']
@@ -90,10 +94,10 @@ function Profile() {
       </Modal>
       <VStack spacing={1}>
         <Heading as="h3" fontSize="xl" color="brand.dark">
-          Tim Cook
+        {user.fullname}
         </Heading>
         <Text color="brand.gray" fontSize="sm">
-          CEO of Apple
+        {user.username}
         </Text>
       </VStack>
     </VStack>
