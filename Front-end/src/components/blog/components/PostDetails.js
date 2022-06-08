@@ -10,8 +10,12 @@ import Loader from './Loader';
 import { Flex, Box, Image, chakra, Spacer, Link, Button, Heading, Text } from '@chakra-ui/react';
 import { EditIcon, DeleteIcon } from '@chakra-ui/icons';
 import inpt from '../images/inpt.png';
+import { selectUser } from '../../../features/userSlice';
+import { useCustomSelector } from '../../../test';
+
 
 const PostDetails = () => {
+  const user = useCustomSelector(selectUser);
   const { id } = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
@@ -38,7 +42,7 @@ const PostDetails = () => {
   const removePost = () => {
     try {
       if (window.confirm(`Are you sure? You can't undo this action afterwards.`)) {
-        dispatch(deletePost(currentPost?._id));
+        dispatch(deletePost(currentPost?._id,user));
         toast.success('Blog successfully removed!');
         setTimeout(() => {
           history.push('/posts');
@@ -48,6 +52,7 @@ const PostDetails = () => {
       toast.error(error);
     }
   };
+
 
   return (
     <>
@@ -98,12 +103,12 @@ const PostDetails = () => {
 
                       <Spacer />
 
-                      <Button colorScheme="blue" mr={3} onClick={openEditMode}>
-                        <EditIcon />
-                      </Button>
-                      <Button onClick={removePost} colorScheme="red">
-                        <DeleteIcon />
-                      </Button>
+                      {user?.username==currentPost?.author?(<><Button colorScheme="blue" mr={3} onClick={openEditMode}>
+                            <EditIcon />
+                          </Button><Button onClick={removePost} colorScheme="red">
+                              <DeleteIcon />
+                            </Button></>):<></>
+                      }
                     </Flex>
                   </Box>
 

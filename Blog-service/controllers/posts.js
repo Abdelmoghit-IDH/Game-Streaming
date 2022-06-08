@@ -16,7 +16,7 @@ import jwt from "jsonwebtoken";
 
 export const decode = (bearerToken) => {
   try {
-    const tokenSecret="your-256-bit-secret";
+    const tokenSecret="secret";
 
     const decodeAuthToken = (token, tokenSecret ) =>
           jwt.verify(token, tokenSecret);
@@ -38,8 +38,6 @@ export const tokenBody = (req) => {
 };
 
 export const getPosts = async (req, res) => {
-  const body = tokenBody(req);
-  if (body["success"]){
   try {
     const posts = await Post.find();
     res.status(200).json(posts);
@@ -48,14 +46,11 @@ export const getPosts = async (req, res) => {
       message: error.message,
     });
   }
-}else {
-  res.status(401).json("Unauthorized");
-} 
+
 };
 
 export const getPostbyChannelId = async (req, res) => {
-  const body = tokenBody(req);
-  if (body["success"]){
+  
   try {
     const id=req.query;
     const posts = await Post.findOne(id);
@@ -65,9 +60,6 @@ export const getPostbyChannelId = async (req, res) => {
       message: error.message,
     });
   }
-}else {
-    res.status(401).json("Unauthorized");
-  } 
 };
 
 export const Search= async (req, res) => {
@@ -91,8 +83,7 @@ export const Search= async (req, res) => {
 };
 
 export const getSinglePost = async (req, res) => {
-  const body = tokenBody(req);
-  if (body["success"]){
+  
   try {
     const { id: _id } = req.params;
     const post = await Post.findById(_id);
@@ -102,9 +93,7 @@ export const getSinglePost = async (req, res) => {
       message: error.message,
     });
   }
-}else {
-  res.status(401).json("Unauthorized");
-}
+
 };
 
 export const createPost = async (req, res) => {
