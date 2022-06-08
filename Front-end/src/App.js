@@ -15,13 +15,16 @@ import { ProtectedRoute } from "./components/protected-route";
 
 function App() {
   const location = useLocation().pathname;
-  const toOverride = ["sign-in", "sign-up", "profile"];
+  const toOverride = ['sign-in', 'sign-up', 'profile'];
+  const toOverridesidebar=['posts', 'sign-in', 'sign-up', 'profile'];
+
+  
 
   return (
     <div className="App">
       {/* Fixed */}
-      {!new RegExp(toOverride.join("|")).test(location) && <Header />}
-      {!new RegExp(toOverride.join("|")).test(location) && <Sidebar />}
+      {!new RegExp(toOverridesidebar.join('|')).test(location) && <Sidebar />}
+      {!new RegExp(toOverride.join('|')).test(location) && <Header />}
       {/* \ Fixed */}
       <Switch>
         <Route exact path="/" component={Games} />
