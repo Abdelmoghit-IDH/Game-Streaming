@@ -61,14 +61,12 @@ async function login(req, res, next) {
 
   // Create an auth token for the user so we can validate future requests
   //TODO: to change with token secret
-  const tokenSecret = "secret";
+  const tokenSecret = process.env.JWT_SECRET;
   const tokenExpiry = "10h";
-  const kid = "231sp2JMLL6NCPFHLIozGub3w42FLQz2"; //TODO: to change to env var
   const { token, expiry } = generateAuthToken(
     user,
     tokenSecret,
-    tokenExpiry,
-    kid
+    tokenExpiry
   );
   const authorization = { token: `Bearer ${token}`, expiresIn: expiry };
 
