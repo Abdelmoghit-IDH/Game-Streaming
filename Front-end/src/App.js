@@ -15,7 +15,6 @@ import { Route, Switch, useLocation } from "react-router-dom";
 import PostsList from "./components/blog/components/PostsList";
 import PostDetails from "./components/blog/components/PostDetails";
 import { ProtectedRoute } from "./components/protected-route";
-import { extendTheme } from "@chakra-ui/react";
 import Profile from "./components/Profile/Profile";
 
 const colors = {
@@ -38,7 +37,7 @@ const config = {
   useSystemColorMode: false,
 };
 
-const themeblog = extendTheme({ colors, config });
+//const themeblog = extendTheme({ colors, config });
 
 function App() {
   const location = useLocation().pathname;
