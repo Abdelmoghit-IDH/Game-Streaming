@@ -33,6 +33,11 @@ const NavbarDropdown = (props) => {
                 Profile
               </Link>
             </div>
+            <div className="dropdown-item">
+              <Link className="dropdown-item-a" to="/channel"> 
+                Channel
+              </Link>
+            </div>
             <div className="dropdown-item"  style={{color: "#6441a4"}}>
               <div onClick={handleLogout} className="dropdown-item-a">
                 LogOut

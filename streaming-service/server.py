@@ -6,13 +6,17 @@ import pymongo
 from pymongo import MongoClient, errors
 import ssl
 import jwt
+from flask_cors import CORS
+
 app = Flask(__name__)
-access_key = 'secret'
-secret_key = 'secret'
+CORS(app)
+
+access_key = 'AKIA4W52BYMVCBRJERN5'
+secret_key = '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'
 client = boto3.client('ivs', region_name='us-east-1',
                       aws_access_key_id=access_key, aws_secret_access_key=secret_key)
 db_secret = 'mongodb+srv://root:twitch_clone@cluster0.qyoik.mongodb.net/twitch_clone?retryWrites=true&w=majority'
-db = MongoClient(db_secret, ssl_cert_reqs=ssl.CERT_NONE)
+db = MongoClient(db_secret)
 db = db['twitch_clone']
 db = db['twitch_clone']
 print("All connection are established")
@@ -88,6 +92,8 @@ def getinfos(username):
 def get_streams():
     rep = client.list_streams(
          maxResults=10)
+    for i in rep['streams']:
+        i["username"]=get_username(i['channelArn'])
     return jsonify(rep['streams'])
 #Teeeeeeeeeeest
 @app.route('/test', methods=['GET'])

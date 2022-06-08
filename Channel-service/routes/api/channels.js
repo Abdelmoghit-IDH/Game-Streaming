@@ -8,7 +8,7 @@ const jwt = require("jsonwebtoken");
 
 const decode = (bearerToken) => {
   try {
-    tokenSecret = "your-256-bit-secret";
+    tokenSecret = "secret";
     const decodeAuthToken = (token, tokenSecret) =>
       jwt.verify(token, tokenSecret);
     const decoded = decodeAuthToken(bearerToken, tokenSecret);
@@ -72,13 +72,13 @@ router.get("/", (req, res) => {
   }
 });
 
-//!@route GET api/channels = Get all MY channels by OWNER_ID
-router.get("/mychannels/:id", (req, res) => {
+//!@route GET api/channels = Get all MY channels by OWNER USERNAME
+router.get("/mychannels/:username", (req, res) => {
   const body = tokenBody(req);
   if (body["success"]) {
-    const id = req.params.id;
+    const username = req.params.username;
     Channel.find({
-      "owner.id": id,
+      "owner.username": username,
     })
       .then((channel) => res.json(channel))
       .catch((error) => {
@@ -108,8 +108,8 @@ router.get("/:id", (req, res) => {
 
 //!@route POST api/channels = Create a Post
 router.post("/", (req, res) => {
-  const body = tokenBody(req);
-  if (body["success"]) {
+  // const body = tokenBody(req);
+  // if (body["success"]) {
     //send request to straming service
     //todo ........check if undefined
     axios
@@ -127,13 +127,13 @@ router.post("/", (req, res) => {
             description: req.body.description,
             profilePictureURL: "test", //todo req.body.profilePictureURL,
             // owner: req.body.owner,
-            owner: body,
-            // {
-            //   id: body["id"],
-            //   fullname: body["fullname"],
-            //   email: body["email"],
-            //   username: body["username"],
-            // },
+            owner: 
+            {
+              // id: body["id"],
+              // fullname: body["fullname"],
+              // email: body["email"],
+              username: req.body.username,
+            },
             ingestEndpoint: response.data["ingestEndpoint"],
             playbackUrl: response.data["playbackUrl"],
             streamKey: response.data["streamKey"],
@@ -154,9 +154,9 @@ router.post("/", (req, res) => {
       .catch((error) => {
         res.status(500).json("Internal Server Error");
       });
-  } else {
-    res.status(401).json("Unauthorized");
-  }
+  // } else {
+  //   res.status(401).json("Unauthorized");
+  // }
 });
 
 //!@route PUT api/channels/:id = Subscribe & Unsubscribe to a channel

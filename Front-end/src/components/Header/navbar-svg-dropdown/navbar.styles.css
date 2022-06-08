@@ -222,7 +222,7 @@
 
 /*DROPDOWN*/
 .dropdown-outter {
-	height: 110px;
+	height: 140px;
 	position: fixed;
 	z-index: 9999;
 	top: 50px;
@@ -249,10 +249,10 @@
 }
 
 .dropdown {
-	height: 539px;
+	/* height: 600px; */
 	z-index: 9999 !important;
 	padding: 5px 0;
-	max-height: 160px;
+	/* max-height: 600px; */
 	border-radius: 6px;
 	background-color: #fff;
 	width: 150px;

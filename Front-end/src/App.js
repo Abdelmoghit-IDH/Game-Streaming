@@ -12,10 +12,11 @@ import SignUp from "./components/Account/signup";
 import Check from "./components/player/Check";
 import Profile from "./components/Profile/Profile";
 import { ProtectedRoute } from "./components/protected-route";
+import Channel from "./components/Channel/Channel";
 
 function App() {
   const location = useLocation().pathname;
-  const toOverride = ["sign-in", "sign-up", "profile"];
+  const toOverride = ["sign-in", "sign-up", "profile","channel"];
 
   return (
     <div className="App">
@@ -34,6 +35,7 @@ function App() {
         <Route exact path="/sign-in/" component={Login} />
         <Route exact path="/sign-up/" component={SignUp} />
         <ProtectedRoute exact path="/profile" component={Profile} />
+        <ProtectedRoute exact path="/channel" component={Channel} />
       </Switch>
     </div>
   );
