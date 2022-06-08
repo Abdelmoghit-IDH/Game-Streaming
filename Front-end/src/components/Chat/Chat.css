@@ -121,7 +121,7 @@ position: relative;
 .message {
 display: flex;
 align-items: center;
-margin-right: 400px;
+margin-right: 270px;
 }
 
 
@@ -131,5 +131,10 @@ background: #e5e5ea;
 color: black;
 }
 
+@media screen and (max-width: 1200px) {
+  .appsz {
+    display: none;
+  }
+}
 
 
