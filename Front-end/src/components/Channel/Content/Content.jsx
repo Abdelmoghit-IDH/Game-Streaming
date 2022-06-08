@@ -16,7 +16,11 @@ const Content = () => {
   const user = useSelector(selectUser);
   console.log(user);
 
-  const [channel, setChannel] = useState();
+  const [channel, setChannel] = useState({
+    owner:{
+      username:"undefined"
+    }
+  });
 
   useEffect(() => {
     axios
@@ -82,7 +86,7 @@ const Content = () => {
 
         <TabPanels px={3} mt={5}>
           <TabPanel>
-            <StreamOfChannel />
+            <StreamOfChannel username={channel.owner.username} />
           </TabPanel>
           <TabPanel>
             <BlogsOfChannel />

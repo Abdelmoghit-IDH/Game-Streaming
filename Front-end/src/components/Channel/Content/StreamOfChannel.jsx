@@ -1,15 +1,20 @@
 import { FormControl, FormLabel, Grid, Input, Select } from '@chakra-ui/react'
 import { useSelector } from "react-redux";
 import { selectUser } from '../../../features/userSlice';
-
-function StreamOfChannel() {
+import Check from '../../player/Check'
+function StreamOfChannel(props) {
 
   const user = useSelector(selectUser);
 
   return (
+    // <div>
+    //   HNA DIAL ABDERRAHIM
+    // </div>
+
     <div>
-      HNA DIAL ABDERRAHIM
+      <Check username={props.username}/>
     </div>
+    
   )
 }
 
