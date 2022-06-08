@@ -4,11 +4,15 @@ import { useParams } from "react-router-dom";
 import api from "../../api-prod";
 import Player from "./Player";
 import { Offline } from "./Offline";
+import Chat from "../Chat/Chat";
 
 function Check(props) {
   let { slug } = useParams();
+  let test = true;
+  if (slug==undefined){
+    test=false
+  }
   slug=slug==undefined ?props.username:slug;
-  console.log("ddddddddddddddd")
   console.log(slug);
   const [infoStream, setInfoStream] = useState(false);
   useEffect(() => {
@@ -27,6 +31,7 @@ function Check(props) {
 console.log(infoStream)
   return infoStream ? (
     <div>
+      {test?<Chat usename={slug}/>:<></>}
       <Player data={infoStream} username={slug}></Player>
     </div>
   ) : (
