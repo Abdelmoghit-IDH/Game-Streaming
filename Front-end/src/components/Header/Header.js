@@ -74,35 +74,10 @@ function Header() {
                 Top streams
               </Link>
             </li>
-            <li className="linkNav">
-              <Link onClick={hideMenu} className="link" to="/posts">
+            <li onClick={hideMenu} className="linkNav">
+              <Link className="link" to="/posts">
                 Top Blogs
               </Link>
-            </li>
-            <li className="linkNav">
-              <form className="formSubmit" onSubmit={handleSubmit}>
-                <input
-                  required
-                  value={searchInput}
-                  onChange={(e) => handleKeyPress(e)}
-                  type="text"
-                  className="inputSearch"
-                />
-                <Link
-                  className="link"
-                  to={{
-                    pathname: `/results/${searchInput}`,
-                  }}
-                >
-                  <button type="submit">
-                    <img
-                      src={search}
-                      alt="magnifier icon"
-                      className="logoMagnifier"
-                    />
-                  </button>
-                </Link>
-              </form>
             </li>
             {user ? (
               <NavbarDropdown hideMenu={hideMenu} />
