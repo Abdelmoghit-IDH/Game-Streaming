@@ -1,14 +1,14 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import api from '../../api-prod';
-import Player from './Player';
-import { Offline } from './Offline';
+import React from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import api from "../../api-prod";
+import Player from "./Player";
+import { Offline } from "./Offline";
 
 function Check() {
   let { slug } = useParams();
   console.log(slug);
-  console.log('in player');
+  console.log("in player");
   const [infoStream, setInfoStream] = useState(false);
   useEffect(() => {
     // Immediately Invoked Function Expression / IIFE
@@ -18,22 +18,26 @@ function Check() {
       console.log(result.data);
 
       // we check if the streamer is online
-      result.data.state === 'OFFLINE' ? setInfoStream(false) : setInfoStream(result.data);
+      result.data.state === "OFFLINE"
+        ? setInfoStream(false)
+        : setInfoStream(result.data);
     })();
   }, [slug]);
-  console.log(infoStream);
+console.log(infoStream)
   return infoStream ? (
     <div>
       <Player data={infoStream} username={slug}></Player>
     </div>
   ) : (
     <>
-      <div className="containerShifted">
-        <div className="contInfo">
-          <div className="titleStream">The streamer is offline. Please come back later. </div>
+    <div className="containerShifted">
+      <div className="contInfo">
+        <div className="titleStream">
+          The streamer is offline. Please come back later.{" "}
         </div>
       </div>
-    </>
+    </div>
+  </>
   );
 }
 

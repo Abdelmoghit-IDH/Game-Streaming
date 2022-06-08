@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import api from '../../api-prod';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import api from "../../api-prod";
 
 function Live() {
   // react-router-dom hook - destructuring
@@ -42,7 +42,9 @@ function Live() {
       console.log(result.data);
 
       // we check if the streamer is online
-      result.data.state === 'OFFLINE' ? setInfoStream(false) : setInfoStream(result.data);
+      result.data.state === "OFFLINE"
+        ? setInfoStream(false)
+        : setInfoStream(result.data);
     })();
   }, [slug]);
 
@@ -53,7 +55,7 @@ function Live() {
       registerIVSQualityPlugin = window.registerIVSQualityPlugin;
 
     // Set up IVS playback tech and quality plugin
-    const IVSPlugin = videojs.getPlugin('getIVSPlayer');
+    const IVSPlugin = videojs.getPlugin("getIVSPlayer");
 
     // If the plugins haven't been loaded, load them.
     if (!IVSPlugin) {
@@ -62,21 +64,21 @@ function Live() {
     }
 
     const videoJsOptions = {
-      techOrder: ['AmazonIVS'],
+      techOrder: ["AmazonIVS"],
 
       controls: true,
       autoplay: true,
     };
 
     // instantiate video.js
-    const player = videojs('amazon-ivs-videojs', videoJsOptions);
+    const player = videojs("amazon-ivs-videojs", videoJsOptions);
     const ivsPlayer = player.getIVSPlayer();
     const PlayerEventType = player.getIVSEvents().PlayerEventType;
 
     player.ready(() => {
       player.enableIVSQualityPlugin();
       player.src(
-        'https://fcc3ddae59ed.us-west-2.playback.live-video.net/api/video/v1/us-west-2.893648527354.channel.DmumNckWFTqz.m3u8',
+        "https://fcc3ddae59ed.us-west-2.playback.live-video.net/api/video/v1/us-west-2.893648527354.channel.DmumNckWFTqz.m3u8"
       );
       player.play();
     });
@@ -93,13 +95,19 @@ function Live() {
         <div className="player ">
           <div className="player-wrapper">
             <div data-vjs-player>
-              <video id="amazon-ivs-videojs" className="video-js vjs-fluid" playsInline />
+              <video
+                id="amazon-ivs-videojs"
+                className="video-js vjs-fluid"
+                playsInline
+              />
             </div>
           </div>
         </div>
         <div className="contInfo containerShifted">
           <div className="viewer">Viewers: {infoStream.viewerCount}</div>
-          <div className="gameInfo">{slug} is streamig again Grab a snack and have fun</div>
+          <div className="gameInfo">
+            {slug} is streamig again Grab a snack and have fun
+          </div>
         </div>
       </div>
     </>
@@ -107,7 +115,9 @@ function Live() {
     <>
       <div className="containerShifted">
         <div className="contInfo">
-          <div className="titleStream">The streamer is offline. Please come back later. </div>
+          <div className="titleStream">
+            The streamer is offline. Please come back later.{" "}
+          </div>
         </div>
       </div>
     </>

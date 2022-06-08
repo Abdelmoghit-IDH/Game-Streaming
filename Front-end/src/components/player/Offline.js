@@ -1,7 +1,9 @@
-import React from 'react';
+import React from 'react'
 
 function Offline() {
-  return <div>Offline</div>;
+  return (
+    <div>Offline</div>
+  )
 }
 
-export default Offline;
+export default Offline

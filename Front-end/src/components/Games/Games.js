@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import api from '../../api-prod';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import api from "../../api-prod";
 
 function Games() {
   // state / setter - destructuring
@@ -13,15 +13,17 @@ function Games() {
   useEffect(() => {
     // Immediately Invoked Function Expression / IIFE
     (async () => {
-      const result = await api.get('https://api.twitch.tv/helix/games/top');
+      const result = await api.get("https://api.twitch.tv/helix/games/top");
       // console.log(result);
 
       // Aaay of games sorted by number of current viewers on Twitch, most popular first
       let dataArray = result.data.data;
       // mapping of dataArray
-      let finalArray = dataArray.map(game => {
+      let finalArray = dataArray.map((game) => {
         // we create a new url for images and we add width and height
-        let newUrl = game.box_art_url.replace('{width}', 250).replace('{height}', 300); // we replace width and height by values
+        let newUrl = game.box_art_url
+          .replace("{width}", 250)
+          .replace("{height}", 300); // we replace width and height by values
         game.box_art_url = newUrl; // we replace url without dimensions by new url
         return game;
       });
@@ -36,7 +38,11 @@ function Games() {
       <div className="flexHome">
         {games.map((game, index) => (
           <div key={index} className="cardGame">
-            <img src={game.box_art_url} alt="Game progile pic" className="imgCard" />
+            <img
+              src={game.box_art_url}
+              alt="Game progile pic"
+              className="imgCard"
+            />
             <div className="cardBodyGame">
               <h5 className="titleCardsGames">{game.name}</h5>
               <Link

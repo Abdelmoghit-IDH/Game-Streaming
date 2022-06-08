@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from 'reactstrap';
+import React from "react";
+import { Link } from "react-router-dom";
+import { Button } from "reactstrap";
 
 function AuthButtons(props) {
   return (
@@ -11,7 +11,12 @@ function AuthButtons(props) {
         </Link>
       </li>
       <li onClick={props.hideMenu} className="linkNav">
-        <Button onClick={props.buttonClick} className="btn-icon btn-3" size="sm" color="primary">
+        <Button
+          onClick={props.buttonClick}
+          className="btn-icon btn-3"
+          size="sm"
+          color="info"
+        >
           Sign Up
         </Button>
       </li>

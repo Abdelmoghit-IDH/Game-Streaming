@@ -1,21 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory, Link } from 'react-router-dom';
-import axios from '../../api/axios';
+import React, { useState, useEffect } from "react";
+import { useHistory, Link } from "react-router-dom";
+import { Button, ChakraProvider } from "@chakra-ui/react";
+import axios from "../../api/auth-api";
 
-const SIGN_UP_URL = '/signup';
+const SIGN_UP_URL = "/signup";
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const FULLNAME_REGEX = /^^[a-zA-Z]{4,}(?: [a-zA-Z]+)?(?: [a-zA-Z]+)?$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 export default function SignUp() {
-  const initialValues = { username: '', fullname: '', email: '', password: '' };
+  const initialValues = { username: "", fullname: "", email: "", password: "" };
 
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [validForm, setvalidForm] = useState(false);
-  const [errMsg, setErrMsg] = useState('');
+  const [errMsg, setErrMsg] = useState("");
 
   const history = useHistory();
 
@@ -23,19 +25,24 @@ export default function SignUp() {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       console.log(formValues);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line
   }, [formErrors]);
 
   useEffect(() => {
-    setErrMsg('');
-  }, [formValues.username, formValues.fullname, formValues.email, formValues.password]);
+    setErrMsg("");
+  }, [
+    formValues.username,
+    formValues.fullname,
+    formValues.email,
+    formValues.password,
+  ]);
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
   };
 
-  const validate = values => {
+  const validate = (values) => {
     const errors = {};
 
     //check if entred value are valid using Regex patterns
@@ -44,41 +51,45 @@ export default function SignUp() {
     const isValidFullname = FULLNAME_REGEX.test(formValues.fullname);
 
     if (!values.username) {
-      errors.username = 'Username is required!';
+      errors.username = "Username is required!";
     } else if (!isValidUsername) {
-      errors.username = 'Please choose a valid username!';
+      errors.username = "Please choose a valid username!";
     }
     if (!values.fullname) {
-      errors.fullname = 'Full name is required!';
+      errors.fullname = "Full name is required!";
     } else if (!isValidFullname) {
-      errors.fullname = 'Please choose a valid full name!';
+      errors.fullname = "Please choose a valid full name!";
     }
     if (!values.email) {
-      errors.email = 'Email is required!';
+      errors.email = "Email is required!";
     }
     if (!values.password) {
-      errors.password = 'Password is required!';
+      errors.password = "Password is required!";
     } else if (!isValidpassword) {
-      errors.password = 'Please choose a stronger password!';
+      errors.password = "Please choose a stronger password!";
     }
 
-    Object.entries(errors).length === 0 ? setvalidForm(true) : setvalidForm(false);
+    Object.entries(errors).length === 0
+      ? setvalidForm(true)
+      : setvalidForm(false);
 
     return errors;
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     //check if entred value are valid
     setFormErrors(validate(formValues));
     setIsSubmit(true);
+    setIsLoading(true);
 
     if (!validForm) {
+      setIsLoading(false);
       return;
     }
 
-    const [firstname, lastname] = formValues.fullname.split(' ');
+    const [firstname, lastname] = formValues.fullname.split(" ");
     const username = formValues.username;
     const email = formValues.email;
     const password = formValues.password;
@@ -96,9 +107,9 @@ export default function SignUp() {
           confirmPassword,
         }),
         {
-          headers: { 'Content-Type': 'application/json' },
+          headers: { "Content-Type": "application/json" },
           withCredentials: false,
-        },
+        }
       );
 
       setSuccess(true);
@@ -107,17 +118,20 @@ export default function SignUp() {
       console.log(response?.data);
       console.log(success);
 
-      history.push('/sign-in');
+      history.push("/sign-in");
 
       //clear state and controlled inputs
-      setErrMsg('');
+      setErrMsg("");
       setFormValues(initialValues);
     } catch (err) {
-      const msgError = JSON.stringify(err?.response['data']['errors'][0]['msg']);
+      setIsLoading(false);
+      const msgError = JSON.stringify(
+        err?.response["data"]["errors"][0]["msg"]
+      );
       if (!err?.response) {
-        setErrMsg('No Server Response');
+        setErrMsg("No Server Response");
       } else {
-        setErrMsg(msgError.replaceAll('"', ''));
+        setErrMsg(msgError.replaceAll('"', ""));
       }
     }
   };
@@ -176,9 +190,17 @@ export default function SignUp() {
             <div className="text-danger">{formErrors.password}</div>
           </div>
           <div className="d-grid">
-            <button type="submit" className="btn btn-primary">
-              Sign Up
-            </button>
+            <ChakraProvider>
+              <Button
+                isLoading={isLoading}
+                loadingText="Loading"
+                colorScheme="blue"
+                spinnerPlacement="start"
+                type="submit"
+              >
+                Sign Up
+              </Button>
+            </ChakraProvider>
           </div>
           <p className="forgot-password text-right">
             Already registered <Link to="/sign-in">sign in?</Link>

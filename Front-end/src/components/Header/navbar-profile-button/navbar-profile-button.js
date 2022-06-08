@@ -1,17 +1,18 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import NavbarAvatar from '../navbar-avatar-svg/navbar-avatar-svg';
+import React from "react";
+import { selectUser } from "../../../features/userSlice";
+import { useCustomSelector } from "../../../test";
+import NavbarAvatar from "../navbar-avatar-svg/navbar-avatar-svg";
 
-function ProfileButton(props) {
+function ProfileButton() {
+  const user = useCustomSelector(selectUser);
+
   return (
     <>
       <div>
         <NavbarAvatar />
       </div>
       <li className="linkNav">
-        <Link onClick={props.hideMenu} className="link" to="/profile">
-          Abdelmoghit
-        </Link>
+        <div className="link">{user.username}</div>
       </li>
     </>
   );

@@ -10,14 +10,13 @@ import Login from './components/Account/signin';
 import SignUp from './components/Account/signup';
 import { ChakraProvider } from '@chakra-ui/react';
 import { theme } from './theme';
-import Cover from './components/Profile/Cover';
-import Main from './components/Profile/Main';
 import Check from './components/player/Check';
-import { Route, Switch, useLocation } from 'react-router-dom';
+import { Route, Switch, useLocation, } from 'react-router-dom';
 import PostsList from './components/blog/components/PostsList';
 import PostDetails from './components/blog/components/PostDetails';
-
+import { ProtectedRoute } from "./components/protected-route";
 import { extendTheme } from '@chakra-ui/react';
+import Profile from './components/Profile/Profile';
 
 const colors = {
   brand: {
@@ -41,11 +40,11 @@ const config = {
 
 const themeblog = extendTheme({ colors, config });
 
-
 function App() {
+
   const location = useLocation().pathname;
   const toOverride = ['sign-in', 'sign-up', 'profile'];
-  const toOverridesidebar=['posts', 'sign-in', 'sign-up', 'profile'];
+  const toOverridesidebar = ['posts', 'sign-in', 'sign-up', 'profile'];
 
   return (
     <div className="App">
@@ -53,7 +52,8 @@ function App() {
       {!new RegExp(toOverridesidebar.join('|')).test(location) && <Sidebar />}
       {!new RegExp(toOverride.join('|')).test(location) && <Header />}
       
-      
+
+
       {/* \ Fixed */}
       <Switch>
         <Route exact path="/" component={Games} />
@@ -65,15 +65,10 @@ function App() {
         <Route exact path="/results/" component={Error} />
         <Route exact path="/sign-in/" component={Login} />
         <Route exact path="/sign-up/" component={SignUp} />
+        <ProtectedRoute exact path="/profile" component={Profile} />
         <ChakraProvider theme={theme}>
           <Route exact path="/posts" component={PostsList} />
           <Route exact path="/posts/:id" component={PostDetails} />
-        </ChakraProvider>
-        <ChakraProvider theme={theme}>
-          <Route path="/profile" exact>
-            <Cover />
-            <Main />
-          </Route>
         </ChakraProvider>
       </Switch>
     </div>

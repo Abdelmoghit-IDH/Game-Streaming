@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 const { REACT_APP_CLIENT_ID, REACT_APP_AUTHORIZATION } = process.env;
 
 // prettier-ignore
