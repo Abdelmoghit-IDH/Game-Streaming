@@ -32,7 +32,7 @@ function Chat() {
   return (
     <div className="appsz">
       <header className="myheader">
-        <h1>{streamer}'s chat👾`</h1>
+        <h1>{streamer}'s chat👾</h1>
       </header>
 
       <div>

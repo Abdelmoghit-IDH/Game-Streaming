@@ -371,10 +371,10 @@ body {
   
 }
 .player{
-  padding-top:70px;
-  padding-left: 250px;
+  padding-top:50px;
+  padding-left: 237px;
   left: 0px;
-  width: 60% ; 
+  width: 64% ; 
 }
 @media screen and (max-width: 1200px) {
   .player {
@@ -407,6 +407,7 @@ body {
   font-weight: 700;
   margin: 3px 5px 0 0;
   font-weight: bold;
+  position: fixed;
 }
 
 .gameInfo {
