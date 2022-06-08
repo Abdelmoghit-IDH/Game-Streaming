@@ -18,8 +18,6 @@ function App() {
   const toOverride = ['sign-in', 'sign-up', 'profile'];
   const toOverridesidebar=['posts', 'sign-in', 'sign-up', 'profile'];
 
-  
-
   return (
     <div className="App">
       {/* Fixed */}
