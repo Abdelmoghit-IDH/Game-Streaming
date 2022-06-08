@@ -6,11 +6,7 @@ function Sidebar() {
   // state / setter
   const [topStreams, setTopStreams] = useState([]);
   //randomize the image
-  function GetRandom(){
-    const items= ["A","B","C","D","E","F"]
-    var item = items[Math.floor(Math.random()*items.length)];
-    return item
-  }
+
   // API CALL
   useEffect(() => {
     const fetchData = async () => {

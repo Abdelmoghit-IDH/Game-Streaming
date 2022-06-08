@@ -15,7 +15,7 @@ function AuthButtons(props) {
           onClick={props.buttonClick}
           className="btn-icon btn-3"
           size="sm"
-          color="primary"
+          color="info"
         >
           Sign Up
         </Button>

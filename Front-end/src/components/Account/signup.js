@@ -25,7 +25,7 @@ export default function SignUp() {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       console.log(formValues);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line
   }, [formErrors]);
 
   useEffect(() => {
