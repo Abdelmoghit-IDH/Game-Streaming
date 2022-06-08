@@ -4,10 +4,9 @@ const NavbarAvatar = () =>
     "svg",
     {
       style: {
-        height: 25,
-        width: 25,
+        height: 20,
+        width: 20,
         position: "static",
-        marginTop: 5,
         fill: "white",
       },
       width: "100%",
