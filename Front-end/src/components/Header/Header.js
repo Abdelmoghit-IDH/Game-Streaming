@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { selectUser } from "../../features/userSlice";
-import { useSelector } from "react-redux";
 import logo from "./IconTwitch.svg";
 import search from "./Search.svg";
 import menuico from "./MenuIco.svg";
 import cross from "./Cross.svg";
 import AuthButtons from "./navbar-auth-buttons/navbar-auth-button";
 import NavbarDropdown from "./navbar-svg-dropdown/navbar-svg-dropdown";
+import { useCustomSelector } from "../../test";
 
 function Header() {
   // states / setters - destructuring
@@ -16,7 +16,7 @@ function Header() {
   const [searchInput, setSearch] = useState("");
   let history = useHistory();
 
-  const user = useSelector(selectUser);
+  const user = useCustomSelector(selectUser);
 
   // test if we > || < 900px
   useEffect(() => {
