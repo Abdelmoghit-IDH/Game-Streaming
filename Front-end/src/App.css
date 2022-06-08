@@ -1,0 +1,710 @@
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #f1f1f1;
+  font-family: sans-serif;
+}
+
+.App {
+  text-align: center;
+}
+
+/* HEADER component */
+
+.headerTop{
+ background: #6441a4;
+ height: 50px;
+ position: fixed;
+ width: 100%;
+ z-index: 1000;
+}
+
+.listMenu{
+ height: 50px;
+ display: flex;
+ align-items: center;
+ width: 100%;
+}
+
+.linkNav{
+  list-style-type: none;
+  padding: 0 20px;
+}
+
+/* Form */
+.linkNav:nth-child(4){
+  margin: 0 auto;
+  flex-shrink: 1;
+  width: 600px;
+}
+
+.link{
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+.logo{
+ margin-top: 5px;
+}
+
+.formSubmit{
+  display: flex;
+  flex-shrink: 1;
+}
+
+.inputSearch{
+  width: 50%;
+  background-color: #fff;
+  border: 2px solid #fff;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.linkNav button{
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding: 4px 20px;
+  border: none;
+}
+
+.logoMagnifier{
+  width: 20px;
+}
+
+.menuResBtn{
+  display: none;
+  position: fixed;
+  top: 10px;
+  right: 20px;
+  color: #fff;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.menuIco{
+  width: 25px;
+}
+
+@media screen and (max-width: 950px) {
+  .linkNav:nth-child(4) {
+    width: 550px; /* we reduce the input */
+  }
+}
+@media screen and (max-width: 900px) {
+  .listMenu {
+    flex-direction: column;
+    height: 250px;
+    padding-top: 50px;
+  }
+  .linkNav {
+    height: 100px;
+    background: #6441a4;
+    width: 100%;
+  }
+  .linkNav:nth-child(4){
+    width: 100%!important;
+    padding: 10px 0 20px 0;
+  }
+  .formSubmit {
+    justify-content: center;
+  }
+  .menuResBtn {
+    display: block!important;
+    z-index: 1000;
+  }
+}
+
+/* \ HEADER component */
+
+/* SIDEBAR component */
+
+.sidebar {
+  position: fixed;
+  top: 50px;
+  width: 239px;
+  background: #19171c;
+  height: 100vh;
+}
+
+.titleSidebar {
+  padding: 30px 0 20px 0;
+  color: #efebf5;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.streamList {
+ padding: 0 0 0 10px;
+ color: #efebf5;
+}
+
+.containerFlexSidebar {
+  padding: 10px 15px 8px 5px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  text-decoration: none;
+  list-style: none;
+  cursor: pointer;
+}
+
+.containerFlexSidebar:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+.profilePicRound {
+  width: 30px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.streamUser {
+  color: #f1f1f1;
+  flex-basis: 50%; /* width */
+  overflow: hidden;
+  text-align: left;
+}
+
+.viewerRight {
+  color: #aeabb6;
+  flex-basis: 30%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.pointRed{
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  margin-top: 6px;
+  margin-right: 3px;
+  background: crimson;
+}
+
+.gameNameSidebar{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #aeabb6;
+  text-align: left;
+  margin-top: 5px;
+}
+
+@media screen and (max-width: 1200px) {
+  .sidebar {
+    display: none;
+  }
+}
+
+/* \ SIDEBAR component */
+
+/* GAMES component */
+
+.titleGames {
+  padding-top: 90px;
+  font-size: 50px;
+  font-weight: 300;
+  padding-left: 260px;
+  padding-bottom: 50px;
+}
+
+.flexHome {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-left: 260px; /* shift for sidebar */
+}
+
+.cardGame {
+  height: 480px;
+  width: 280px;
+  margin: 0 30px 30px 0;
+  position: relative;
+  transition: all 0.4s;
+  border-radius: 10px;
+  box-shadow: 2px 11px 36px -16px rgba(0,0,0,0.75);
+}
+
+.cardGame:hover {
+  transform: translateY(-5px);
+}
+
+.imgCard {
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.cardBodyGame {
+  height: 144px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly; /* equal space between elements */
+}
+
+.titleCardsGames {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-transform: uppercase; /* three dots when hidden part */
+  width:80%;
+  overflow: hidden;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.btnCard {
+  height: 50px;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  background-color: #212529;
+  font-size: 14px;
+  line-height: 1.125;
+  border-radius: 5px;
+  padding: 2px 5px;
+  cursor: pointer;
+}
+
+.btnCard:hover {
+  text-decoration: none;
+  color: #fff;
+}
+
+@media screen and (max-width: 1200px) {
+  .titleGames {
+    padding-left: 0px;
+  }
+  .flexHome {
+    padding-left: 30px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .titleGames {
+    font-size: 40px;
+  }
+}
+@media screen and (max-width: 559px) {
+  .cardGame {
+    margin: 0 0 30px 0;
+  }
+  .flexHome{
+    padding-left: 0px;
+  }
+}
+
+/* \ GAMES component */
+
+/* TOP STREAMS component */
+
+.cardStream {
+  height: 420px;
+  width: 320px;
+  margin: 0 30px 30px 0;
+  transition: all 0.4s;
+  border-radius: 10px;
+  box-shadow: 2px 11px 36px -16px rgba(0,0,0,0.75);
+}
+
+.cardStream:hover {
+  transform: translateY(-5px);
+}
+
+.titleCardStream {
+  font-size: 21px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 80%;
+  font-weight: 600;
+}
+
+.cardBodyStream {
+  height: 180px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 30px;
+}
+
+.txtStream {
+  width: 80%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.viewers {
+  margin-bottom: 20px;
+}
+
+@media screen and (max-width: 559px) {
+  .cardStream {
+    margin: 0 0 30px 0;
+  }
+}
+
+/* \ TOP STREAMS component */
+
+/* LIVE component */
+
+.containerShifted {
+  overflow-x: hidden;
+  padding-top: 50px;
+  padding-left: 239px;
+  
+}
+.player{
+  padding-top:70px;
+  padding-left: 250px;
+  left: 0px;
+  width: 60% ; 
+}
+@media screen and (max-width: 1200px) {
+  .player {
+    padding-left: 20px;
+  }
+}
+.contInfo {
+  color: #19171c;
+  display: grid;
+  height: 156px;
+  width: calc(100% - 340px); /* we remove chat size */
+  grid-template: repeat(3, 35px) / 1fr 1fr; /* 3 rows 35px, 2 col sharing available space*/
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+.titleStream {
+  grid-area: 1 / 1 / 2 / 3; /* from row 1/col 1 to row 2/col 3 */
+  text-align: left;
+  margin-left: 5px;
+  font-weight: 400;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.viewer {
+  grid-area: 1 / 2 / 2 / 3; /* from row 1/col 2 to row 2/col 3 */
+  text-align: right;
+  color: crimson;
+  font-weight: 700;
+  margin: 3px 5px 0 0;
+  font-weight: bold;
+}
+
+.gameInfo {
+  grid-area: 2 / 1 / 3 / 3;  /* from row 2/col 1 to row 3/col 3 */
+  text-align: left;
+  margin-left: 5px;
+  font-weight: 400;
+  font-size: 20px;
+  font-weight: bold;
+  font-weight: bold;
+}
+
+.gameName {
+  grid-area: 3 / 1 / 4 / 2; /* from row 3/col 1 to row 4/col 2 */
+  text-align: left;
+  margin-left: 5px;
+  font-weight: 400;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+@media screen and (max-width: 1200px) {
+  .containerShifted {
+    padding-left: 0;
+  }
+  .contInfo{
+    width: calc(100%);
+  }
+  .viewer {
+    margin: 5px 25px 0 0;
+  }
+}
+
+@media screen and (max-width: 630px) {
+  .contInfo {
+    grid-template: 45px 35px 35px 35px / 1fr 1fr;
+  }
+  .titleStream {
+    font-size: 14px;
+  }
+  .gameName {
+    font-size: 14px;
+  }
+  .gameInfo {
+    font-size: 14px;
+  }
+  .viewer {
+    font-size: 14px;
+    margin: 0 0 0 5px;
+    grid-area: 4 / 1 / 5 / 2;
+    text-align: left;
+  }
+}
+
+/* \ LIVE component */
+
+/* GAME STREAM component */
+
+.titleGamesStreams {
+  padding-top: 100px;
+  font-size: 53px;
+  font-weight: 300;
+  padding-left: 260px;
+  padding-bottom: 10px;
+}
+.subTitleGameStreams {
+  font-size: 25px;
+  font-weight: 300;
+  padding-left: 260px;
+  padding-bottom: 50px;
+}
+
+.textColored {
+  color: #6441a4;
+}
+
+.cardGameStreams {
+  height: 380px;
+  width: 320px;
+  margin: 0 30px 30px 0;
+  transition: all 0.4s;
+  border-radius: 10px;
+  box-shadow: 2px 11px 36px -16px rgba(0,0,0,0.75);
+}
+.cardGameStreams:hover {
+  transform: translateY(-5px);
+}
+.cardBodyGameStreams {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+@media screen and (max-width:1200px) {
+  .titleGamesStreams {
+    padding-left: 0px;
+    font-size: 30px;
+  }
+  .subTitleGameStreams {
+    font-size: 17px;
+    padding-left: 0px;
+    padding-bottom: 50px;
+  }
+}
+
+@media screen and (max-width:559px) {
+  .cardGameStreams {
+    margin: 0 0 30px 0;
+  }
+}
+
+/* GAME STREAM component */
+
+/* RESULTS component */
+
+.containerShiftResults {
+  overflow-x: hidden;
+  padding-top: 50px;
+  padding-left: 239px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+}
+.containerShiftResults h4 {
+  padding-top: 50px;
+  padding-bottom: 20px;
+  font-size: 24px;
+}
+.cardResults {
+  height: 580px;
+  width: 350px;
+  margin-bottom: 35px;
+  position: relative;
+  transition: all 0.4s;
+  /* Proprietes bootstrap */
+  border-radius: 10px;
+  box-shadow: 2px 11px 36px -16px rgba(0,0,0,0.75);
+  margin-top: 20px;
+}
+.cardBodyResults {
+  height: 230px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+}
+
+.cardBodyResults .btnCarte{
+  align-self: flex-end;
+}
+
+.txtResult {
+  font-weight: 500;
+  font-size: 16px;
+  font-weight: 400;
+}
+.btnResult {
+  background: rgb(255, 191, 0);
+  color: #000;
+  font-size: 17px;
+}
+.btnResult:hover {
+  color: #000;
+}
+
+/* Custom */
+@media screen and (max-width:1200px) {
+  .containerShiftResults {
+  
+    overflow-x: hidden;
+    padding-top: 0px;
+    padding-left: 0px;
+
+  }
+  .containerShiftResults h4 {
+    padding-top: 100px;
+  }
+
+}
+@media screen and (max-width:600px) {
+  .containerShiftResults h4 {
+
+    padding-bottom: 20px;
+    font-size: 16px;
+  }
+  .cardResults {
+    height: 580px;
+    width: 300px;
+
+  }
+}
+.spanTxt {
+  color: #000!important;
+}
+.titleResults {
+ padding-top: 50px;
+}
+
+
+.myplayer{
+  padding-top: 50px;
+}
+/* \ RESULTS component */
+
+h1,h2,h3,h4,h5,h6,label,span {
+  font-weight: 500;
+  font-family: 'Fira Sans', sans-serif;
+}
+body, html, .App, #root, .auth-wrapper {
+  width: 100%;
+  height: 100%;
+}
+.navbar-light {
+  background-color: #ffffff;
+  box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
+}
+.auth-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: left;
+}
+.auth-inner {
+  width: 450px;
+  margin: auto;
+  background: #ffffff;
+  box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
+  padding: 40px 55px 45px 55px;
+  border-radius: 15px;
+  transition: all .3s;
+}
+.auth-wrapper .form-control:focus {
+  border-color: #167bff;
+  box-shadow: none;
+}
+.auth-wrapper h3 {
+  text-align: center;
+  margin: 0;
+  line-height: 1;
+  padding-bottom: 20px;
+}
+.custom-control-label {
+  font-weight: 400;
+}
+.forgot-password,
+.forgot-password a {
+  text-align: right;
+  font-size: 13px;
+  padding-top: 10px;
+  color: #7f7d7d;
+  margin: 0;
+}
+.forgot-password a {
+  color: #167bff;
+}
+
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
+
+.loader {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.validation__error {
+  opacity: 0;
+  font-size: 0.75rem;
+  color: lightpink;
+  animation: errorAlert 300ms ease forwards;
+  padding-top: 0.2rem;
+  white-space: pre-line;
+  clear: both;
+}
+
+#react-select-2-listbox {
+  color: #2c313a;
+}
+
+.css-hdd9l7 {
+  background: rgb(0 0 0 / 72%) !important;
+}
+
+@keyframes errorAlert {
+  0% {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
