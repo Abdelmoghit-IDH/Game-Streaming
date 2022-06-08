@@ -1,9 +1,11 @@
 import React, { useRef, useState } from 'react';
 import './Chat.css';
-
+import { selectUser } from "../../features/userSlice";
+import { useCustomSelector } from "../../test";
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/analytics';
+import {useLocation} from "react-router-dom";
 
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
@@ -23,16 +25,19 @@ const analytics = firebase.analytics();
 
 function Chat() {
 
+  const location = useLocation().pathname;
+  const streamer = location.slice(6)
+
 
   return (
-    <div className="App">
-      <header>
-        <h1>Abderrahim's chat👾</h1>
+    <div className="appsz">
+      <header className="myheader">
+        <h1>{streamer}'s chat👾`</h1>
       </header>
 
-      <section>
-        {<ChatRoom />}
-      </section>
+      <div>
+        {<ChatRoom/>}
+      </div>
 
     </div>
   );
@@ -41,9 +46,13 @@ function Chat() {
 
 
 function ChatRoom() {
+  const user = useCustomSelector(selectUser);
+
   const dummy = useRef();
-  const messagesRef = firestore.collection('Abdessalam');
-  const query = messagesRef.orderBy('createdAt').limit(25);
+  const location = useLocation().pathname;
+  const streamer = location.slice(6)
+  const messagesRef = firestore.collection(streamer);
+  const query = messagesRef.orderBy('createdAt');
 
   const [messages] = useCollectionData(query, { idField: 'id' });
 
@@ -56,7 +65,8 @@ function ChatRoom() {
 
     await messagesRef.add({
       text: formValue,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      username: user.username
     })
 
     setFormValue('');
@@ -65,11 +75,11 @@ function ChatRoom() {
   }
 
   return (<>
-    <main>
+    <main className="mymain">
 
       {messages && messages.map(msg => <ChatMessage key={msg.id} message={msg} />)}
 
-      <span ref={dummy}></span>
+      <span ref={dummy} className="myspan"></span>
 
     </main>
 
@@ -85,14 +95,15 @@ function ChatRoom() {
 
 
 function ChatMessage(props) {
+  const user = useCustomSelector(selectUser);
   const { text } = props.message;
 
   const messageClass = 'received';
 
   return (<>
     <div className={`message ${messageClass}`}>
-      <img src={'https://api.adorable.io/avatars/23/abott@adorable.png'} />
-      <p>{text}</p>
+      <img src={'https://api.adorable.io/avatars/23/abott@adorable.png'} className="myimg" />
+      <p className="myp">{user.username} : {text}</p>
     </div>
   </>)
 }
