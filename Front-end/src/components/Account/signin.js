@@ -12,6 +12,7 @@ export default function Login() {
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
   const [errMsg, setErrMsg] = useState("");
+  const [validForm, setvalidForm] = useState(false);
 
   const history = useHistory();
 
@@ -27,6 +28,10 @@ export default function Login() {
 
     setFormErrors(validate(formValues));
     setIsSubmit(true);
+
+    if (!validForm) {
+      return;
+    }
 
     const login = formValues.username;
     const password = formValues.password;
@@ -104,6 +109,11 @@ export default function Login() {
     } else if (values.password.length < 4) {
       errors.password = "Password must be more than 4 characters";
     }
+
+    Object.entries(errors).length === 0
+      ? setvalidForm(true)
+      : setvalidForm(false);
+
     return errors;
   };
 
