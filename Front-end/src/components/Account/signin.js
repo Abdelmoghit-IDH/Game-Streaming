@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import axios from "../../api/auth-api";
 import { useDispatch } from "react-redux";
 import { signin } from "../../features/userSlice";
+import { Button, ChakraProvider } from "@chakra-ui/react";
 
 const SIGN_IN_URL = "/signin";
 
@@ -11,11 +12,11 @@ export default function Login() {
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [errMsg, setErrMsg] = useState("");
   const [validForm, setvalidForm] = useState(false);
 
   const history = useHistory();
-
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
@@ -28,8 +29,10 @@ export default function Login() {
 
     setFormErrors(validate(formValues));
     setIsSubmit(true);
+    setIsLoading(true);
 
     if (!validForm) {
+      setIsLoading(false);
       return;
     }
 
@@ -70,11 +73,14 @@ export default function Login() {
         console.log(error);
       }
 
+      setIsLoading(false);
       setErrMsg("");
       setFormValues(initialValues);
 
       history.push("/");
     } catch (err) {
+      setIsLoading(false);
+
       if (!err?.response) {
         setErrMsg("No Server Response");
       } else if (err.response?.status === 400) {
@@ -160,9 +166,17 @@ export default function Login() {
               </div>
             </div>
             <div className="d-grid">
-              <button type="submit" className="btn btn-primary">
-                Submit
-              </button>
+              <ChakraProvider>
+                <Button
+                  isLoading={isLoading}
+                  loadingText="Loading"
+                  colorScheme="blue"
+                  spinnerPlacement="start"
+                  type="submit"
+                >
+                  Submit
+                </Button>
+              </ChakraProvider>
             </div>
             <div className="text-danger">{errMsg}</div>
           </form>

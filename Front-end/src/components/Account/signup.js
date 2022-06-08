@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
+import { Button, ChakraProvider } from "@chakra-ui/react";
 import axios from "../../api/auth-api";
 
 const SIGN_UP_URL = "/signup";
@@ -13,6 +14,7 @@ export default function SignUp() {
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [validForm, setvalidForm] = useState(false);
   const [errMsg, setErrMsg] = useState("");
@@ -80,8 +82,10 @@ export default function SignUp() {
     //check if entred value are valid
     setFormErrors(validate(formValues));
     setIsSubmit(true);
+    setIsLoading(true);
 
     if (!validForm) {
+      setIsLoading(false);
       return;
     }
 
@@ -120,6 +124,7 @@ export default function SignUp() {
       setErrMsg("");
       setFormValues(initialValues);
     } catch (err) {
+      setIsLoading(false);
       const msgError = JSON.stringify(
         err?.response["data"]["errors"][0]["msg"]
       );
@@ -185,9 +190,17 @@ export default function SignUp() {
             <div className="text-danger">{formErrors.password}</div>
           </div>
           <div className="d-grid">
-            <button type="submit" className="btn btn-primary">
-              Sign Up
-            </button>
+            <ChakraProvider>
+              <Button
+                isLoading={isLoading}
+                loadingText="Loading"
+                colorScheme="blue"
+                spinnerPlacement="start"
+                type="submit"
+              >
+                Sign Up
+              </Button>
+            </ChakraProvider>
           </div>
           <p className="forgot-password text-right">
             Already registered <Link to="/sign-in">sign in?</Link>
