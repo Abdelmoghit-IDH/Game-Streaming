@@ -17,12 +17,15 @@ import {
 import { Button } from '@chakra-ui/button';
 import { Input } from '@chakra-ui/input';
 import { FormControl, FormLabel } from '@chakra-ui/form-control';
-
 import { createPost } from '../redux/actions/post';
+import { useCustomSelector } from '../../../test';
+import { selectUser } from '../../../features/userSlice';
+
 
 const categories = ['Frontend', 'Backend', 'Mobile', 'React', 'Vue', 'JavaScript', 'Fun', 'Gaming'];
 
 const AddPostForm = ({ isOpen, onClose }) => {
+  const user = useCustomSelector(selectUser);
   const [file, setFile] = useState(null);
 
   const { register, errors, control, handleSubmit } = useForm();
@@ -31,7 +34,7 @@ const AddPostForm = ({ isOpen, onClose }) => {
 
   const onSubmit = data => {
     try {
-      dispatch(createPost({ ...data, image: file }));
+      dispatch(createPost({ ...data, image: file },user));
       toast.success('Blog successfully added!');
       clearForm();
     } catch (error) {

@@ -75,6 +75,11 @@ function Header() {
               </Link>
             </li>
             <li className="linkNav">
+              <Link onClick={hideMenu} className="link" to="/posts">
+                Top Blogs
+              </Link>
+            </li>
+            <li className="linkNav">
               <form className="formSubmit" onSubmit={handleSubmit}>
                 <input
                   required

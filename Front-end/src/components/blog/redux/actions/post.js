@@ -21,10 +21,10 @@ export const fetchSinglePost = id => async dispatch => {
   }
 };
 
-export const createPost = post => async dispatch => {
+export const createPost = (post,user) => async dispatch => {
   try {
     dispatch({ type: types.CREATE_POST_REQUEST, payload: post });
-    const { data } = await api.createPost(post);
+    const { data } = await api.createPost(post,user);
     dispatch({
       type: types.CREATE_POST_SUCCESS,
       payload: data,
@@ -34,10 +34,10 @@ export const createPost = post => async dispatch => {
   }
 };
 
-export const updatePost = (id, post) => async dispatch => {
+export const updatePost = (id, post, user) => async dispatch => {
   try {
     dispatch({ type: types.UPDATE_POST_REQUEST });
-    const { data } = await api.updatePost(id, post);
+    const { data } = await api.updatePost(id, post,user);
     dispatch({
       type: types.UPDATE_POST_SUCCESS,
       payload: data,
@@ -47,10 +47,10 @@ export const updatePost = (id, post) => async dispatch => {
   }
 };
 
-export const deletePost = id => async dispatch => {
+export const deletePost = (id,user) => async dispatch => {
   try {
     dispatch({ type: types.DELETE_POST_REQUEST });
-    const { data } = await api.deletePost(id);
+    const { data } = await api.deletePost(id,user);
     dispatch({
       type: types.DELETE_POST_SUCCESS,
       payload: data._id,

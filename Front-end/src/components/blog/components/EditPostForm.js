@@ -8,9 +8,13 @@ import { Textarea, Box, Flex, Heading, Select } from '@chakra-ui/react';
 import { FormControl, FormLabel } from '@chakra-ui/form-control';
 import { Button } from '@chakra-ui/button';
 import { Input } from '@chakra-ui/input';
+import { useCustomSelector } from '../../../test';
+import { selectUser } from '../../../features/userSlice';
+
 
 
 const EditPostForm = ({ post, closeEditMode }) => {
+  const user = useCustomSelector(selectUser);
   const [file, setFile] = useState(post?.image);
   const { register, errors, control, handleSubmit } = useForm();
   const dispatch = useDispatch();
@@ -22,7 +26,7 @@ const EditPostForm = ({ post, closeEditMode }) => {
         ...data,
         image: file,
       };
-      dispatch(updatePost(post._id, updatedPost));
+      dispatch(updatePost(post._id, updatedPost,user));
       toast.success('Blog successfully updated!');
       setFile(null);
       closeEditMode();

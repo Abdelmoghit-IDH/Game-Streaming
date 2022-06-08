@@ -7,10 +7,13 @@ import { fetchPosts } from '../redux/actions/post';
 import Loader from './Loader';
 import AddPostForm from './AddPostForm';
 import { useDisclosure } from '@chakra-ui/hooks';
-
 import { useColorModeValue, Box, Wrap, Button, Flex } from '@chakra-ui/react';
+import { useCustomSelector } from '../../../test';
+import { selectUser } from '../../../features/userSlice';
+
 
 const PostsList = () => {
+  let user = useCustomSelector(selectUser);
   const listPost = useSelector(state => state.posts);
   const { posts, loading, error } = listPost;
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -57,9 +60,10 @@ const PostsList = () => {
       </Wrap>
       
     </Flex>
-    <Button ml="10" my="20" colorScheme="teal" size="sm" onClick={onOpen}>
+    {user!==null?(<Button ml="10" my="20" colorScheme="teal" size="sm" onClick={onOpen}>
               New Post
-            </Button>
+            </Button>):<></>}
+
     <AddPostForm isOpen={isOpen} onClose={onClose} />
     </>
   );
