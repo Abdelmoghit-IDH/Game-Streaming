@@ -7,36 +7,47 @@
     "node": "12.18.3"
   },
   "dependencies": {
-    "@chakra-ui/react": "^1.5.0",
+    "@chakra-ui/icons": "^1.0.15",
+    "@chakra-ui/modal": "^1.9.1",
+    "@chakra-ui/react": "^1.6.9",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@reduxjs/toolkit": "^1.8.2",
     "@testing-library/jest-dom": "^5.15.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
-    "@tgdn/react-dropdown": "^0.0.7",
     "axios": "^0.21.4",
     "dotenv": "^8.6.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.26.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "framer-motion": "^4",
+    "moment": "^2.29.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-file-base64": "^1.0.3",
+    "react-hook-form": "^6.13.1",
     "react-redux": "^8.0.2",
     "react-responsive-modal": "^6.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^5.0.1",
+    "react-toastify": "^8.0.3",
     "reactstrap": "^9.0.3",
     "redux": "^4.2.0",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.1",
-    "web-vitals": "^0.2.4"
+    "web-vitals": "^0.2.4",
+    "yarn": "^1.22.18"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "eject": "react-scripts eject",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix",
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
   },
   "browserslist": {
     "production": [
@@ -52,6 +63,8 @@
   },
   "devDependencies": {
     "@redux-devtools/core": "^3.13.1",
-    "dotenv-webpack": "^7.1.0"
+    "dotenv-webpack": "^7.1.0",
+    "eslint": "^7.32.0",
+    "prettier": "^2.4.1"
   }
 }

@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../../../features/userSlice";
+import { useCustomDispatch } from "../../../test";
 import ProfileButton from "../navbar-profile-button/navbar-profile-button";
 import "./navbar.styles.css";
 
 const NavbarDropdown = (props) => {
   const [display, setDisplay] = useState(false);
-  const dispatch = useDispatch();
+  const dispatch = useCustomDispatch();
 
   const handleLogout = (e) => {
     e.preventDefault();

@@ -1,10 +1,10 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { selectUser } from "../../../features/userSlice";
+import { useCustomSelector } from "../../../test";
 import NavbarAvatar from "../navbar-avatar-svg/navbar-avatar-svg";
 
 function ProfileButton() {
-  const user = useSelector(selectUser);
+  const user = useCustomSelector(selectUser);
 
   return (
     <>

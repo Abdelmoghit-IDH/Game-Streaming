@@ -9,7 +9,14 @@ const FULLNAME_REGEX = /^^[a-zA-Z]{4,}(?: [a-zA-Z]+)?(?: [a-zA-Z]+)?$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 export default function SignUp() {
-  const initialValues = { username: "", fullname: "", email: "", password: "" };
+  const initialValues = {
+    username: "",
+    fullname: "",
+    email: "",
+    password: "",
+    description: "",
+    channel: "",
+  };
 
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
@@ -25,7 +32,7 @@ export default function SignUp() {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       console.log(formValues);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line
   }, [formErrors]);
 
   useEffect(() => {
@@ -49,6 +56,7 @@ export default function SignUp() {
     const isValidUsername = USER_REGEX.test(formValues.username);
     const isValidpassword = PWD_REGEX.test(formValues.password);
     const isValidFullname = FULLNAME_REGEX.test(formValues.fullname);
+    const isValidChannel = USER_REGEX.test(formValues.channel);
 
     if (!values.username) {
       errors.username = "Username is required!";
@@ -68,6 +76,11 @@ export default function SignUp() {
     } else if (!isValidpassword) {
       errors.password = "Please choose a stronger password!";
     }
+    if (!values.channel) {
+      errors.channel = "Full name is required!";
+    } else if (!isValidChannel) {
+      errors.channel = "Please choose a valid channel name!";
+    }
 
     Object.entries(errors).length === 0
       ? setvalidForm(true)
@@ -83,6 +96,9 @@ export default function SignUp() {
     setFormErrors(validate(formValues));
     setIsSubmit(true);
     setIsLoading(true);
+
+    console.log(formValues.channel)
+    console.log(formValues.description)
 
     if (!validForm) {
       setIsLoading(false);
@@ -188,6 +204,29 @@ export default function SignUp() {
               onChange={handleChange}
             />
             <div className="text-danger">{formErrors.password}</div>
+          </div>
+          <div className="mb-3">
+            <label>Channel Name</label>
+            <input
+              type="text"
+              name="channel"
+              className="form-control"
+              placeholder="Choose a channel name"
+              value={formValues.channel}
+              onChange={handleChange}
+            />
+            <div className="text-danger">{formErrors.channel}</div>
+          </div>
+          <div className="mb-3">
+            <label>Channel description</label>
+            <input
+              type="text"
+              name="description"
+              className="form-control"
+              placeholder="Choose a channel description"
+              value={formValues.description}
+              onChange={handleChange}
+            />
           </div>
           <div className="d-grid">
             <ChakraProvider>

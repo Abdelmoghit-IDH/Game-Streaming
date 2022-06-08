@@ -17,8 +17,8 @@ import {
   useDisclosure,
   VStack,
 } from '@chakra-ui/react';
-import { useSelector } from "react-redux";
 import { selectUser } from '../../../features/userSlice';
+import { useCustomSelector } from '../../../test';
 
 function Profile() {
   const [userProfile, setUserProfile] = useState(null)
@@ -30,7 +30,7 @@ function Profile() {
     profileImage.current.click()
   }
 
-  const user = useSelector(selectUser);
+  const user = useCustomSelector(selectUser);
 
   const changeProfileImage = event => {
     const ALLOWED_TYPES = ['image/png', 'image/jpeg', 'image/jpg']

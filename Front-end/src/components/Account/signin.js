@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "../../api/auth-api";
-import { useDispatch } from "react-redux";
 import { signin } from "../../features/userSlice";
 import { Button, ChakraProvider } from "@chakra-ui/react";
+import { useCustomDispatch } from "../../test";
 
 const SIGN_IN_URL = "/signin";
 
@@ -17,7 +17,7 @@ export default function Login() {
   const [validForm, setvalidForm] = useState(false);
 
   const history = useHistory();
-  const dispatch = useDispatch();
+  const dispatch = useCustomDispatch();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -98,7 +98,7 @@ export default function Login() {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       console.log(formValues);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line
   }, [formErrors]);
 
   useEffect(() => {
