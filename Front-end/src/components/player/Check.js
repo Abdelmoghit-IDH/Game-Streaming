@@ -5,10 +5,11 @@ import api from "../../api-prod";
 import Player from "./Player";
 import { Offline } from "./Offline";
 
-function Check() {
+function Check(props) {
   let { slug } = useParams();
+  slug=slug==undefined ?props.username:slug;
+  console.log("ddddddddddddddd")
   console.log(slug);
-  console.log("in player");
   const [infoStream, setInfoStream] = useState(false);
   useEffect(() => {
     // Immediately Invoked Function Expression / IIFE

@@ -41,8 +41,10 @@ export const getPosts = async (req, res) => {
 export const getPostbyChannelId = async (req, res) => {
   
   try {
-    const id=req.query;
-    const posts = await Post.findOne(id);
+    const { id: _id1 } = req.params;
+    const posts = await Post.find({
+      chanid: _id1 
+    })
     res.status(200).json(posts);
   } catch (error) {
     res.status(404).json({

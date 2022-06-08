@@ -9,6 +9,10 @@ export const fetchSinglePost = async id => {
   return await axios.get(`${API_ENDPOINT}/blogbyid/${id}`, );
 };
 
+export const fetchPostsBychanid = async id => {
+  return await axios.get(`${API_ENDPOINT}/blogbychanid/${id}` );
+};
+
 export const createPost = async (post, user) => {
   return await axios.post(`${API_ENDPOINT}/createblog`, post, { headers: { Authorization: `Bearer ${user.token}` } });
 };

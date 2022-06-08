@@ -17,6 +17,8 @@ import PostDetails from './components/blog/components/PostDetails';
 import { ProtectedRoute } from "./components/protected-route";
 import { extendTheme } from '@chakra-ui/react';
 import Profile from './components/Profile/Profile';
+import Channel from "./components/Channel/Channel";
+
 
 const colors = {
   brand: {
@@ -44,7 +46,7 @@ function App() {
 
   const location = useLocation().pathname;
   const toOverride = ['sign-in', 'sign-up', 'profile'];
-  const toOverridesidebar = ['posts', 'sign-in', 'sign-up', 'profile'];
+  const toOverridesidebar = ['posts', 'sign-in', 'sign-up', 'profile','channel'];
 
   return (
     <div className="App">
@@ -66,6 +68,7 @@ function App() {
         <Route exact path="/sign-in/" component={Login} />
         <Route exact path="/sign-up/" component={SignUp} />
         <ProtectedRoute exact path="/profile" component={Profile} />
+        <ProtectedRoute exact path="/channel" component={Channel} />
         <ChakraProvider theme={theme}>
           <Route exact path="/posts" component={PostsList} />
           <Route exact path="/posts/:id" component={PostDetails} />
