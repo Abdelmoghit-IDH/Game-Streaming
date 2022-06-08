@@ -17,13 +17,13 @@ import {
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
-import { useSelector } from "react-redux";
 import { selectUser } from "../../../features/userSlice";
 import axios from "axios";
+import { useCustomSelector } from "../../../test";
 // import api from "../../../api-prod";
 
 function Profile() {
-  const user = useSelector(selectUser);
+  const user = useCustomSelector(selectUser);
   console.log(user);
 
   const [channel, setChannel] = useState({

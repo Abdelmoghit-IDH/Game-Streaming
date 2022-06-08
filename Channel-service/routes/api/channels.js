@@ -8,7 +8,7 @@ const jwt = require("jsonwebtoken");
 
 const decode = (bearerToken) => {
   try {
-    tokenSecret = "secret";
+    tokenSecret = "abdelmoghit2022";
     const decodeAuthToken = (token, tokenSecret) =>
       jwt.verify(token, tokenSecret);
     const decoded = decodeAuthToken(bearerToken, tokenSecret);

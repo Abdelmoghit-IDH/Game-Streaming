@@ -1,11 +1,10 @@
 import { Box, Button } from '@chakra-ui/react'
-import { useState, useRef, useEffect } from "react";
-import { useSelector } from "react-redux";
 import { selectUser } from "../../../features/userSlice";
 import axios from "axios";
+import { useCustomSelector } from '../../../test';
 
 function Actions(props) {
-  const user = useSelector(selectUser);
+  const user = useCustomSelector(selectUser);
   // const [buttonText, setButtonText] = useState("Follow")
   let buttonText="Follow"
 

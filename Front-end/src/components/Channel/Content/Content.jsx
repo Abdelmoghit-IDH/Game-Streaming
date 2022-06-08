@@ -7,13 +7,13 @@ import EventsOfChannel from "./EventsOfChannel";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 // import api from "../../../api-prod";
-import { useSelector } from "react-redux";
+import { useCustomSelector } from '../../../test';
 import { selectUser } from "../../../features/userSlice";
 
 const Content = () => {
   const tabs = ["Stream", "Blogs", "Events"];
 
-  const user = useSelector(selectUser);
+  const user = useCustomSelector(selectUser);
   console.log(user);
 
   const [channel, setChannel] = useState({

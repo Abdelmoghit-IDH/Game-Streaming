@@ -2,14 +2,7 @@ import { Box } from '@chakra-ui/react'
 
 import Action1 from './Action1'
 import Action2 from './Action2'
-import Data from './Data'
 import Profile from './Profile'
-
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-// import api from "../../../api-prod";
-import { useSelector } from "react-redux";
-import { selectUser } from "../../../features/userSlice";
 
 function Sidebar() {
   return (

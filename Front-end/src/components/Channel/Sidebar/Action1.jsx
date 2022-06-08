@@ -10,11 +10,11 @@ import {
 
 import axios from "axios";
 // import api from "../../../api-prod";
-import { useSelector } from "react-redux";
 import { selectUser } from "../../../features/userSlice";
+import { useCustomSelector } from '../../../test';
 
 export default function Actions() {
-  const user = useSelector(selectUser);
+  const user = useCustomSelector(selectUser);
   console.log(user);
 
   const [channel, setChannel] = useState({
