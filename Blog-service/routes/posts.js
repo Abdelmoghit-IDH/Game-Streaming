@@ -15,11 +15,11 @@ const router = express.Router();
 
 router.get("/", getPosts);
 router.get("/search",Search);
-router.get("/usr", getPostbyChannelId );
-router.get("/:id", getSinglePost);
-router.post("/", createPost);
-router.patch("/:id", updatePost);
-router.delete("/:id", deletePost);
+router.get("/blogbychanid", getPostbyChannelId );
+router.get("/blogbyid/:id", getSinglePost);
+router.post("/createblog", createPost);
+router.patch("/updateblog/:id", updatePost);
+router.delete("/deleteblog/:id", deletePost);
 
 
 export default router;

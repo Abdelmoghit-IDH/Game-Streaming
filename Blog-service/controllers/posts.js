@@ -1,18 +1,7 @@
 import Post from "../models/posts.js";
 import jwt from "jsonwebtoken";
 
-/* {
-     "id": 2,
-     "firstname": "abdelmoghit",
-     "lastname": "idhsaine",
-     "fullname": "abdelmoghit idhsaine",
-     "email": "abdelmoghit1@gmail.com",
-     "username": "abdelmoghit1",
-     "signupDate": "2022-05-19T21:01:41.000Z",
-     "isAdmin": false,
-     "iat": 1652994755,
-     "exp": 1653030755
- }*/
+
 
 export const decode = (bearerToken) => {
   try {
