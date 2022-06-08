@@ -46,7 +46,7 @@ def get_arn_recording(username):
 # create channel
 
 
-@app.route('/createchannel/<username>', methods=['POST'])
+@app.route('/streaming/createchannel/<username>', methods=['POST'])
 def create_channel(username):
 
     r_arn = 'arn:aws:ivs:us-east-1:873879159594:recording-configuration/TgMwZQKfvK5S'
@@ -75,7 +75,7 @@ def create_channel(username):
 # get info
 
 
-@app.route('/getinfos/<username>', methods=['GET'])
+@app.route('/streaming/getinfos/<username>', methods=['GET'])
 def getinfos(username):
     try:
         arn = get_arn(username)
@@ -88,7 +88,7 @@ def getinfos(username):
 # get streams
 
 
-@app.route('/getstreams', methods=['GET'])
+@app.route('/streaming/getstreams', methods=['GET'])
 def get_streams():
     rep = client.list_streams(
          maxResults=10)
@@ -107,7 +107,7 @@ def test():
 # delete channel (admin or owner access)
 
 
-@app.route('/deletechannel/<username>', methods=['DELETE'])
+@app.route('/streaming/deletechannel/<username>', methods=['DELETE'])
 def delete_channel(username):
     key = "your-256-bit-secret"
     check_jwt = request.headers.get('Authorization').split(" ")

@@ -113,7 +113,7 @@ router.post("/", (req, res) => {
     //send request to straming service
     //todo ........check if undefined
     axios
-      .post("http://127.0.0.1:5000/createchannel/" + body["username"],req.headers)
+      .post("http://127.0.0.1:5000/streaming/createchannel/" + body["username"],req.headers)
       .then((response) => {
         // console.log(`statusCode: ${response.status}`);
         // console.log(response);
@@ -160,11 +160,11 @@ router.post("/", (req, res) => {
 });
 
 //!@route PUT api/channels/:id = Subscribe & Unsubscribe to a channel
-router.put("/:id", async (req, res) => {
+router.put("/:username", async (req, res) => {
   const body = tokenBody(req);
   if (body["success"]) {
     //id of the channel
-    const id = req.params.id;
+    const username = req.params.username;
     const isSubscribing = req.body.subscrib;
     // console.log(isSubscribing);
     // const user = {
@@ -173,7 +173,7 @@ router.put("/:id", async (req, res) => {
     //   name: body.userName,
     //   email: body.userEmail,
     // };
-    const doc = await Channel.findOne({ _id: id });
+    const doc = await Channel.findOne({ "owner.username": username });
     if (isSubscribing) {
       // doc.subscribersList.push(user);
       doc.subscribersList.push(body);
@@ -206,7 +206,7 @@ router.delete("/:id", (req, res) => {
     headers=req.headers
     axios
       .delete(
-        "http://127.0.0.1:5000/deletechannel/" + req.body.owner.username,
+        "http://127.0.0.1:5000/streaming/deletechannel/" + req.body.owner.username,
         {
           headers,
         }

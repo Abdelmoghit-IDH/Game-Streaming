@@ -97,7 +97,7 @@ const Content = () => {
         </TabPanels>
       </Tabs>
 
-      <Actions />
+      <Actions channel={channel} />
     </Box>
   );
 };
