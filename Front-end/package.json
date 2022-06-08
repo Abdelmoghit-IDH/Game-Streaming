@@ -14,6 +14,7 @@
     "@testing-library/jest-dom": "^5.15.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "@tgdn/react-dropdown": "^0.0.7",
     "axios": "^0.21.4",
     "dotenv": "^8.6.0",
     "react": "^17.0.2",

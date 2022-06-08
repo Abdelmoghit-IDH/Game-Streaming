@@ -1,3 +1,4 @@
+import { Route, Switch, useLocation } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header/Header";
 import Sidebar from "./components/Sidebar/Sidebar";
@@ -8,12 +9,9 @@ import Results from "./components/Results/Results";
 import Error from "./components/Error/Error";
 import Login from "./components/Account/signin";
 import SignUp from "./components/Account/signup";
-import { ChakraProvider } from "@chakra-ui/react";
-import { theme } from "./theme";
 import Check from "./components/player/Check";
-import { Route, Switch, useLocation } from "react-router-dom";
-import { ProtectedRoute } from "./components/protected-route";
 import Profile from "./components/Profile/Profile";
+import { ProtectedRoute } from "./components/protected-route";
 
 function App() {
   const location = useLocation().pathname;
@@ -35,9 +33,7 @@ function App() {
         <Route exact path="/results/" component={Error} />
         <Route exact path="/sign-in/" component={Login} />
         <Route exact path="/sign-up/" component={SignUp} />
-        <ChakraProvider theme={theme}>
-          <ProtectedRoute exact path="/profile" component={Profile} />
-        </ChakraProvider>
+        <ProtectedRoute exact path="/profile" component={Profile} />
       </Switch>
     </div>
   );

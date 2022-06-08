@@ -6,8 +6,8 @@ import logo from "./IconTwitch.svg";
 import search from "./Search.svg";
 import menuico from "./MenuIco.svg";
 import cross from "./Cross.svg";
-import ProfileButton from "./navbar-profile-button/navbar-profile-button";
 import AuthButtons from "./navbar-auth-buttons/navbar-auth-button";
+import NavbarDropdown from "./navbar-svg-dropdown/navbar-svg-dropdown";
 
 function Header() {
   // states / setters - destructuring
@@ -100,7 +100,7 @@ function Header() {
               </form>
             </li>
             {user ? (
-              <ProfileButton hideMenu={hideMenu} />
+              <NavbarDropdown hideMenu={hideMenu} />
             ) : (
               <AuthButtons
                 hideMenu={hideMenu}
