@@ -15,7 +15,7 @@ function Sidebar() {
   useEffect(() => {
     const fetchData = async () => {
       // Get Streams
-      const result = await api.get("http://127.0.0.1:5000/getstreams");
+      const result = await api.get("http://127.0.0.1:5000/streaming/getstreams");
      
 
       // Array of informations about active streams
