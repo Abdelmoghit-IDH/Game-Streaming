@@ -19,7 +19,7 @@ function Check(props) {
     // Immediately Invoked Function Expression / IIFE
     (async () => {
       // Get Streams
-      const result = await api.get(`http://127.0.0.1:5000/getinfos/${slug}`);
+      const result = await api.get(`http://127.0.0.1:5000/streaming/getinfos/${slug}`);
       console.log(result.data);
 
       // we check if the streamer is online

@@ -1,9 +1,57 @@
 import { Box, Button } from '@chakra-ui/react'
+import { useState, useRef, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../../features/userSlice";
+import axios from "axios";
 
-function Actions() {
+function Actions(props) {
+  const user = useSelector(selectUser);
+  // const [buttonText, setButtonText] = useState("Follow")
+  let buttonText="Follow"
+
+  let channel = props.channel;
+
+  if(channel && channel.subscribersList){
+    for (const subscriber of channel.subscribersList) {
+      console.log('looooooooooop');
+      if(subscriber["username"]==user["username"]){
+        // setButtonText("Unfollow")
+        buttonText= "Unfollow"
+        break
+      }
+    }
+    console.log('looooooooooop');
+  } 
+
+
+  function buttonOnClick(){
+    axios
+      .put(
+        "http://localhost:3002/api/channels/" + user["username"],
+        {
+          subscrib:buttonText=="Follow"
+        },
+        {
+          headers: { authorization: "Bearer " + user["token"] },
+        }
+      )
+      .then(({ data }) => {
+        // setChannel(data[0]);
+        // console.log("~~~~éé~~~é");
+        console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAa");
+        console.log(data);
+        buttonText=buttonText=="Follow"?"Unfollow":"Follow"
+        window.location.reload(false);
+      })
+      .catch((err) => {
+        console.log("€€€€€ error" + err);
+      });
+  }
+  
+
   return (
-    <Box mt={5} py={5} px={8} borderTopWidth={1} borderColor="brand.light">
-      <Button>Update</Button>
+    <Box mt={5} py={5} px={8} borderTopWidth={1} borderColor="red.light">
+      <Button onClick={buttonOnClick} backgroundColor="red">{buttonText}</Button>
     </Box>
   )
 }
