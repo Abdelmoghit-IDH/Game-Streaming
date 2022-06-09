@@ -32,11 +32,10 @@ function Profile() {
     owner: { username: "" },
     description: "",
   });
-  const apiServer = process.env.API_GATEWAY;
   useEffect(() => {
     axios
       .get(
-        apiServer+"/api/channels/mychannels/" + user["username"],
+        "/api/channels/mychannels/" + user["username"],
         {
           headers: { authorization: "Bearer " + user["token"] },
         }

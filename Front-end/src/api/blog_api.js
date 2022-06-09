@@ -1,10 +1,9 @@
 import axios from 'axios';
 
-const apiServer = process.env.API_GATEWAY;
-const API_ENDPOINT = apiServer +'/blogs';
+const API_ENDPOINT = '/blogs';
 
 export const fetchPosts = async  () => {
-  return await axios.get(API_ENDPOINT );
+  return await axios.get(API_ENDPOINT);
 };
 
 export const fetchSinglePost = async id => {

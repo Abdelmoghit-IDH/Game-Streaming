@@ -97,11 +97,11 @@ export default function SignUp() {
     setIsSubmit(true);
     setIsLoading(true);
 
-    console.log(formValues.channel)
-    console.log(formValues.description)
+    console.log(formValues.channel);
+    console.log(formValues.description);
 
-    const channelName = formValues.channel
-    const channelDescription = formValues.description
+    const channelName = formValues.channel;
+    const channelDescription = formValues.description;
 
     if (!validForm) {
       setIsLoading(false);
@@ -116,7 +116,7 @@ export default function SignUp() {
 
     try {
       const response = await axios.post(
-       SIGN_UP_URL,
+        SIGN_UP_URL,
         JSON.stringify({
           firstname,
           lastname,
@@ -138,13 +138,12 @@ export default function SignUp() {
       console.log(success);
 
       console.log(username);
-      const apiServer = process.env.API_GATEWAY;
       await axios.post(
-        apiServer+"/api/channels/createChannel/",
+        "/api/channels/createChannel/",
         {
-          "name":channelName,
-          "description":channelDescription,
-          "username":username
+          name: channelName,
+          description: channelDescription,
+          username: username,
         }
         // ,
         // {
@@ -152,7 +151,6 @@ export default function SignUp() {
         //   withCredentials: false,
         // }
       );
-
 
       history.push("/sign-in");
 
