@@ -11,11 +11,15 @@ import {
   NumberInputField,
   NumberInputStepper,
 } from '@chakra-ui/react'
+import Postlistbyid from '../../blog/components/Postlistbyid'
+
+
+
 
 function BlogsOfChannel() {
   return (
     <div>
-      HNA IBRAHIM
+      <Postlistbyid></Postlistbyid>
     </div>
   )
 }

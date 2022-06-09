@@ -19,6 +19,7 @@ import {
 } from "@chakra-ui/react";
 import { selectUser } from "../../../features/userSlice";
 import axios from "axios";
+import { useSelector } from "react-redux";
 import { useCustomSelector } from "../../../test";
 // import api from "../../../api-prod";
 

@@ -693,6 +693,18 @@ body, html, .App, #root, .auth-wrapper {
   color: #2c313a;
 }
 
+.mylink{
+  position:fixed;
+  left:255px;
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  top: 12.5px;
+}
+.mylink:hover {
+  color: #fff;
+  text-decoration: none;
+}
 .css-hdd9l7 {
   background: rgb(0 0 0 / 72%) !important;
 }

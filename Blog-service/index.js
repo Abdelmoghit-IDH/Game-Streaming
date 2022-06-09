@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
   });
 });
 
-app.use("/posts", postRoutes);
+app.use("/blogs", postRoutes);
 
 const PORT = process.env.PORT || 3003;
 
@@ -40,3 +40,15 @@ mongoose
   .catch((error) => {
     console.error(error.message);
   });
+
+
+  /*
+  router.get("/blogs", getPosts);
+router.get("/blogs/search",Search);
+router.get("/blogs/blogbychanid", getPostbyChannelId );
+router.get("/blogs/blogbyid/:id", getSinglePost);
+router.post("/blogs/createblog", createPost);
+router.patch("//blogs/updateblog/:id", updatePost);
+router.delete("/blogs/deleteblog/:id", deletePost);
+
+  */

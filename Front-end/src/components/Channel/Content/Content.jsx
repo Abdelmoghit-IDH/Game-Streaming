@@ -10,6 +10,8 @@ import axios from "axios";
 import { useCustomSelector } from '../../../test';
 import { selectUser } from "../../../features/userSlice";
 
+
+
 const Content = () => {
   const tabs = ["Stream", "Blogs", "Events"];
 
@@ -88,7 +90,7 @@ const Content = () => {
 
         <TabPanels px={3} mt={5}>
           <TabPanel>
-            <StreamOfChannel username={channel.owner.username} />
+            {/* <StreamOfChannel username={channel.owner.username} /> */}
           </TabPanel>
           <TabPanel>
             <BlogsOfChannel />

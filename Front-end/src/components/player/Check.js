@@ -1,9 +1,7 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect,React } from "react";
 import { useParams } from "react-router-dom";
 import api from "../../api-prod";
 import Player from "./Player";
-import { Offline } from "./Offline";
 import Chat from "../Chat/Chat";
 
 function Check(props) {
