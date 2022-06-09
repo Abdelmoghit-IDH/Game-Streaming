@@ -6,9 +6,10 @@ const Channel = myModule.Channel;
 const axios = require("axios");
 const jwt = require("jsonwebtoken");
 
+const apigateway= process.env.API_GATEWAY
 const decode = (bearerToken) => {
   try {
-    tokenSecret = "secret";
+    tokenSecret = process.env.JWT_SECRET;
     const decodeAuthToken = (token, tokenSecret) =>
       jwt.verify(token, tokenSecret);
     const decoded = decodeAuthToken(bearerToken, tokenSecret);
@@ -113,7 +114,7 @@ router.post("/", (req, res) => {
     //send request to straming service
     //todo ........check if undefined
     axios
-      .post("http://127.0.0.1:5000/createchannel/" + body["username"],req.headers)
+      .post(`${apigateway}/createchannel/` + body["username"],req.headers)
       .then((response) => {
         // console.log(`statusCode: ${response.status}`);
         // console.log(response);
@@ -206,7 +207,7 @@ router.delete("/:id", (req, res) => {
     headers=req.headers
     axios
       .delete(
-        "http://127.0.0.1:5000/deletechannel/" + req.body.owner.username,
+        `${apigateway}/deletechannel/` + req.body.owner.username,
         {
           headers,
         }

@@ -14,26 +14,18 @@ const PostsList = () => {
   let user = useCustomSelector(selectUser);
   const listPost = useSelector(state => state.posts);
   const { posts, loading, error } = listPost;
-  console.log("ana  ",
-  posts);
-  
   let filteredlist=[]
   for (let pas = 0; pas < posts.length; pas++){
   if (posts[pas].chanid==user?.id){
     filteredlist.push(posts[pas])
   }
   }
-  console.log(posts[0])
   const { isOpen, onOpen, onClose } = useDisclosure();
-
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchPosts());
   }, [dispatch]);
-
-  console.log(posts[0]?.title)
   
-
   return (
     <>
     

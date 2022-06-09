@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import api from "../../api-prod";
 import Player from "./Player";
-import { Offline } from "./Offline";
 
 function Check(props) {
   let { slug } = useParams();
