@@ -6,7 +6,6 @@ const Channel = myModule.Channel;
 const axios = require("axios");
 const jwt = require("jsonwebtoken");
 
-const apigateway= process.env.API_GATEWAY
 const decode = (bearerToken) => {
   try {
     tokenSecret = process.env.JWT_SECRET;
@@ -116,7 +115,7 @@ router.post("/createChannel", (req, res) => {
     console.log("AAAAAAAAAAAAAAAAAAAAAAAAA");
     console.log(req.body);
     axios
-      .post(`${apigateway}/createchannel/` + body["username"],req.headers)
+      .post(`/createchannel/` + body["username"],req.headers)
       .then((response) => {
         // console.log(`statusCode: ${response.status}`);
         // console.log(response);
@@ -210,7 +209,7 @@ router.delete("/:id", (req, res) => {
     headers=req.headers
     axios
       .delete(
-        `${apigateway}/deletechannel/` + req.body.owner.username,
+        "/deletechannel/" + req.body.owner.username,
         {
           headers,
         }
