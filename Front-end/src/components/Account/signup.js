@@ -100,6 +100,9 @@ export default function SignUp() {
     console.log(formValues.channel)
     console.log(formValues.description)
 
+    const channelName = formValues.channel
+    const channelDescription = formValues.description
+
     if (!validForm) {
       setIsLoading(false);
       return;
@@ -133,6 +136,23 @@ export default function SignUp() {
       //TODO: to remove after implementation
       console.log(response?.data);
       console.log(success);
+
+      console.log(username);
+
+      await axios.post(
+        "http://127.0.0.1:3002/api/channels/",
+        {
+          "name":channelName,
+          "description":channelDescription,
+          "username":username
+        }
+        // ,
+        // {
+        //   headers: { "Content-Type": "application/json" },
+        //   withCredentials: false,
+        // }
+      );
+
 
       history.push("/sign-in");
 

@@ -112,14 +112,17 @@ router.post("/", (req, res) => {
   // if (body["success"]) {
     //send request to straming service
     //todo ........check if undefined
+    console.log("AAAAAAAAAAAAAAAAAAAAAAAAA");
+    console.log(req.body);
     axios
-      .post("http://127.0.0.1:5000/streaming/createchannel/" + body["username"],req.headers)
+      .post("http://127.0.0.1:5000/streaming/createchannel/" + req.body.username,req.headers)
       .then((response) => {
         // console.log(`statusCode: ${response.status}`);
         // console.log(response);
 
         // console.log(response);
         // console.log("yyyyyyyyyyyyy");
+
         if (response.statusText == "OK") {
           const newChannel = new Channel({
             //_id is set by default
