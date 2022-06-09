@@ -36,7 +36,7 @@ async function authorized(req, res, next) {
       return res.status(statusCodes.unauthorized).json(responseData);
     }
 
-    const tokenSecret = process.env.JWT_SECRET;
+    const tokenSecret = 'secret';
     const decoded = decodeAuthToken(bearerToken, tokenSecret);
 
     if(!decoded) {

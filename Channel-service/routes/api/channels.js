@@ -8,7 +8,7 @@ const jwt = require("jsonwebtoken");
 
 const decode = (bearerToken) => {
   try {
-    tokenSecret = process.env.JWT_SECRET;
+    tokenSecret = "secret";
     const decodeAuthToken = (token, tokenSecret) =>
       jwt.verify(token, tokenSecret);
     const decoded = decodeAuthToken(bearerToken, tokenSecret);
@@ -115,7 +115,7 @@ router.post("/createChannel", (req, res) => {
     console.log("AAAAAAAAAAAAAAAAAAAAAAAAA");
     console.log(req.body);
     axios
-      .post(`/createchannel/` + body["username"],req.headers)
+      .post(`/streaming/createchannel/` + body["username"],req.headers)
       .then((response) => {
         // console.log(`statusCode: ${response.status}`);
         // console.log(response);
@@ -209,7 +209,7 @@ router.delete("/:id", (req, res) => {
     headers=req.headers
     axios
       .delete(
-        "/deletechannel/" + req.body.owner.username,
+        "/streaming/deletechannel/" + req.body.owner.username,
         {
           headers,
         }

@@ -14,7 +14,7 @@ var jwt = require("jsonwebtoken");
 
 var decode = function decode(bearerToken) {
   try {
-    tokenSecret = "your-256-bit-secret";
+    tokenSecret = "secret";
 
     var decodeAuthToken = function decodeAuthToken(token, tokenSecret) {
       return jwt.verify(token, tokenSecret);
