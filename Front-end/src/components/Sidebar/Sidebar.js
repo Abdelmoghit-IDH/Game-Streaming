@@ -41,7 +41,7 @@ function Sidebar() {
             >
               <li key={index} className="containerFlexSidebar">
                 <img
-                  src={"/images/"+stream.username.charAt(0)+".png"}
+                  src={"../../../public/images/"+stream.username.charAt(0)+".png"}
                   alt="logo user"
                   className="profilePicRound"
                 />

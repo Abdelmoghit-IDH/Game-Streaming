@@ -21,7 +21,7 @@ export default function Actions() {
     "streamKey":""
   });
   useEffect(() => {
-    axiosF
+    axios
       .get(
         "/api/channels/mychannels/" + user["username"],
         {
