@@ -3,7 +3,7 @@ import { useHistory, Link } from "react-router-dom";
 import { Button, ChakraProvider } from "@chakra-ui/react";
 import axios from "../../api/auth-api";
 
-const SIGN_UP_URL = "/signup";
+const SIGN_UP_URL = "/api/auth/signup";
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const FULLNAME_REGEX = /^^[a-zA-Z]{4,}(?: [a-zA-Z]+)?(?: [a-zA-Z]+)?$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -116,7 +116,7 @@ export default function SignUp() {
 
     try {
       const response = await axios.post(
-        SIGN_UP_URL,
+       SIGN_UP_URL,
         JSON.stringify({
           firstname,
           lastname,
@@ -138,9 +138,9 @@ export default function SignUp() {
       console.log(success);
 
       console.log(username);
-
+      const apiServer = process.env.API_GATEWAY;
       await axios.post(
-        "http://127.0.0.1:3002/api/channels/",
+        apiServer+"/api/channels/createChannel/",
         {
           "name":channelName,
           "description":channelDescription,

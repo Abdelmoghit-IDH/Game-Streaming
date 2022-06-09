@@ -5,7 +5,7 @@ import { signin } from "../../features/userSlice";
 import { Button, ChakraProvider } from "@chakra-ui/react";
 import { useCustomDispatch } from "../../test";
 
-const SIGN_IN_URL = "/signin";
+const SIGN_IN_URL = "/api/auth/signin";
 
 export default function Login() {
   const initialValues = { username: "", password: "" };
@@ -38,6 +38,7 @@ export default function Login() {
 
     const login = formValues.username;
     const password = formValues.password;
+    // const authServer = process.env.API_GATEWAY;
 
     try {
       const response = await axios.post(

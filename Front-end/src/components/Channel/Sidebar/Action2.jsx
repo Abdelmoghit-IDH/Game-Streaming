@@ -20,11 +20,11 @@ export default function Actions() {
     "ingestEndpoint":"",
     "streamKey":""
   });
-
+  const apiServer = process.env.API_GATEWAY;
   useEffect(() => {
     axios
       .get(
-        "http://localhost:3002/api/channels/mychannels/" + user["username"],
+        apiServer+"/api/channels/mychannels/" + user["username"],
         {
           headers: { authorization: "Bearer " + user["token"] },
         }

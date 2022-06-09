@@ -1,10 +1,7 @@
-from urllib import response
+
 from flask import Flask, jsonify , request
 import boto3
-import flask
-import pymongo
 from pymongo import MongoClient, errors
-import ssl
 import jwt
 from flask_cors import CORS
 
@@ -96,16 +93,6 @@ def get_streams():
         i["username"]=get_username(i['channelArn'])
     return jsonify(rep['streams'])
 #Teeeeeeeeeeest
-@app.route('/test', methods=['GET'])
-def test():
-    key = "Wah a liyam wah"
-    check_jwt = request.headers.get('Authorization').split(" ")
-    print(check_jwt)
-    #
-    return jsonify(jwt.decode(check_jwt[1], key, algorithms="HS256"))
-
-# delete channel (admin or owner access)
-
 
 @app.route('/streaming/deletechannel/<username>', methods=['DELETE'])
 def delete_channel(username):
@@ -126,4 +113,4 @@ def delete_channel(username):
         return jsonify({'isDeleted':False})
 
 if __name__ == "__main__":
-    app.run()
+    app.run(port=3004,host="0.0.0.0")

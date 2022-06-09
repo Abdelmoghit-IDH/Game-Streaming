@@ -48,7 +48,7 @@ router.get("/testToken", (req, res) => {
 });
 
 //!@route GET api/channels = Get all channels (even by name)
-router.get("/", (req, res) => {
+router.get("/getChannel", (req, res) => {
   const body = tokenBody(req);
   if (body["success"]) {
     const name = req.body.name;
@@ -107,7 +107,7 @@ router.get("/:id", (req, res) => {
 });
 
 //!@route POST api/channels = Create a Post
-router.post("/", (req, res) => {
+router.post("/createChannel", (req, res) => {
   // const body = tokenBody(req);
   // if (body["success"]) {
     //send request to straming service
@@ -163,7 +163,7 @@ router.post("/", (req, res) => {
 });
 
 //!@route PUT api/channels/:id = Subscribe & Unsubscribe to a channel
-router.put("/:username", async (req, res) => {
+router.put("/subscribe/:username", async (req, res) => {
   const body = tokenBody(req);
   if (body["success"]) {
     //id of the channel

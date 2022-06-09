@@ -22,11 +22,11 @@ function Actions(props) {
     console.log('looooooooooop');
   } 
 
-
+  const apiServer = process.env.API_GATEWAY;
   function buttonOnClick(){
     axios
       .put(
-        "http://localhost:3002/api/channels/" + user["username"],
+        apiServer+"/api/channels/subscribe/" + user["username"],
         {
           subscrib:buttonText=="Follow"
         },
