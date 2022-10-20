@@ -1,8 +1,10 @@
 const express = require("express");
 const http = require("http");
 const userModule = require("../index");
+const cors = require("cors");
 
 const app = express();
+app.use(cors());
 const store = userModule.getDbAdapter("sequelize");
 
 // Bind the routes under [apiMountPoint] (default: ***/api/users***):
@@ -24,7 +26,7 @@ userModule.listen(app, (apiMountPoint = "/api/auth"), (customRoutes = {}));
   });
 
   // set port, listen for requests
-  const PORT = process.env.PORT || 8080;
+  const PORT = process.env.PORT || 3001;
 
   // Proceed with normal server initialization tasks
   server.listen(PORT, () => {

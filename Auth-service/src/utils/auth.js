@@ -13,6 +13,7 @@ const checkPassword = async (password, hashedPassword) => {
 
 const generateAuthToken = (user, tokenSecret, tokenExpiry, kid) => {
   const tokenData   = user;
+  tokenData.iss = "admin-issuer";
   const signedToken = jwt.sign(tokenData, tokenSecret, { //TODO: change 
     algorithm: "HS256",
     expiresIn: tokenExpiry,

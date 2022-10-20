@@ -1,3 +1,4 @@
+
 * {
   margin: 0;
   padding: 0;
@@ -31,7 +32,7 @@ body {
 
 .linkNav{
   list-style-type: none;
-  padding: 0 20px;
+  padding: 0 10px;
 }
 
 /* Form */
@@ -367,8 +368,19 @@ body {
   overflow-x: hidden;
   padding-top: 50px;
   padding-left: 239px;
+  
 }
-
+.player{
+  padding-top:50px;
+  padding-left: 237px;
+  left: 0px;
+  width: 64% ; 
+}
+@media screen and (max-width: 1200px) {
+  .player {
+    padding-left: 20px;
+  }
+}
 .contInfo {
   color: #19171c;
   display: grid;
@@ -376,6 +388,7 @@ body {
   width: calc(100% - 340px); /* we remove chat size */
   grid-template: repeat(3, 35px) / 1fr 1fr; /* 3 rows 35px, 2 col sharing available space*/
   margin-top: 5px;
+  font-weight: bold;
 }
 
 .titleStream {
@@ -384,6 +397,7 @@ body {
   margin-left: 5px;
   font-weight: 400;
   font-size: 20px;
+  font-weight: bold;
 }
 
 .viewer {
@@ -392,6 +406,8 @@ body {
   color: crimson;
   font-weight: 700;
   margin: 3px 5px 0 0;
+  font-weight: bold;
+  position: fixed;
 }
 
 .gameInfo {
@@ -400,6 +416,8 @@ body {
   margin-left: 5px;
   font-weight: 400;
   font-size: 20px;
+  font-weight: bold;
+  font-weight: bold;
 }
 
 .gameName {
@@ -407,6 +425,7 @@ body {
   text-align: left;
   margin-left: 5px;
   font-weight: 400;
+  font-weight: bold;
   font-size: 20px;
 }
 
@@ -589,8 +608,11 @@ body {
  padding-top: 50px;
 }
 
-/* \ RESULTS component */
 
+.myplayer{
+  padding-top: 50px;
+}
+/* \ RESULTS component */
 
 h1,h2,h3,h4,h5,h6,label,span {
   font-weight: 500;
@@ -643,4 +665,59 @@ body, html, .App, #root, .auth-wrapper {
 .forgot-password a {
   color: #167bff;
 }
+
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
+
+.loader {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.validation__error {
+  opacity: 0;
+  font-size: 0.75rem;
+  color: lightpink;
+  animation: errorAlert 300ms ease forwards;
+  padding-top: 0.2rem;
+  white-space: pre-line;
+  clear: both;
+}
+
+#react-select-2-listbox {
+  color: #2c313a;
+}
+
+.mylink{
+  position:fixed;
+  left:255px;
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  top: 12.5px;
+}
+.mylink:hover {
+  color: #fff;
+  text-decoration: none;
+}
+.css-hdd9l7 {
+  background: rgb(0 0 0 / 72%) !important;
+}
+
+@keyframes errorAlert {
+  0% {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 

@@ -1,0 +1,51 @@
+Streamers : accéder à leur chaîne     //GET     Search       DONE (by name)
+                                                OneChannel   DONE (get the doc by the channel id)
+Créer une Chaîne                      //POST                 DONE ()
+S’abonner à une autre chaîne          //PUT                  DONE (subscribe : true)
+                                      //PUT   unsubscribe    DONE (subscribe : false)
+List all the channel of a user        //GET                  DONE (by the oowner_id)
+Lister et visualiser ses vidéos (au niveau de sa chaîne)     DONE (get the doc by the channel id) (then retreive the videos)
+
+//TOODOOOOOOO
+update channel
+
+
+
+
+
+Ajouter dans sa chaîne un article     ??????????????
+??
+Participer au "chat" d’un live streaming (sa chaîne + les autres chaînes)
+Laisser un commentaire pour une vidéo déjà diffusée (sa chaîne + les autres chaînes)
+Visualiser un fil d’actualité proposant le contenu (lives, vidéos, articles) des chaînes où on est abonné
+
+######################################################################################
+channel : 
+    - id : 
+    - name : 
+    - description : 
+    - profile picture :
+    - date of creation :
+    - owner :
+        {
+            - id : 
+            - name :
+            - email :
+        } 
+    - List of subscribers :
+        [
+            {
+                - id : 
+                - name :
+                - email :
+            }    
+        ]
+    - List of videos :
+        [
+            -id of doc :
+        ]
+    - List of blogs :         ??????????????
+        [
+            -id of doc :
+        ]
+

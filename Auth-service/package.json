@@ -4,7 +4,8 @@
   "description": "A user management and authentication for Game streaming platform",
   "main": "src/server/server.js",
   "scripts": {
-    "start": "node src/server/server.js"
+    "start": "node src/server/server.js",
+    "test": "jest"
   },
   "keywords": [
     "authentication",
@@ -17,6 +18,7 @@
   ],
   "author": "Abdelmoghit-IDH <abdelmoghit.idhsaine@gmail.com>",
   "license": "MIT",
+  "proxy": "http://localhost:3000",
   "dependencies": {
     "bcrypt": "5.0.0",
     "cookie-parser": "1.4.5",
@@ -26,6 +28,7 @@
     "express-session": "1.17.1",
     "express-validator": "6.6.1",
     "jsonwebtoken": "8.5.1",
+    "cors": "^2.8.5",
     "morgan": "1.10.0",
     "mysql2": "2.2.5",
     "pg": "8.5.1",
@@ -33,5 +36,8 @@
     "random-bytes": "1.0.0",
     "sequelize": "6.3.5",
     "tedious": "9.2.1"
+  },
+  "devDependencies": {
+    "jest": "^28.1.0"
   }
 }

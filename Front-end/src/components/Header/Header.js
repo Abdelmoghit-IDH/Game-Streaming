@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
+import { selectUser } from "../../features/userSlice";
 import logo from "./IconTwitch.svg";
 import search from "./Search.svg";
 import menuico from "./MenuIco.svg";
 import cross from "./Cross.svg";
-import { Link } from "react-router-dom";
-import { Button } from "reactstrap";
+import AuthButtons from "./navbar-auth-buttons/navbar-auth-button";
+import NavbarDropdown from "./navbar-svg-dropdown/navbar-svg-dropdown";
+import { useCustomSelector } from "../../test";
 
 function Header() {
   // states / setters - destructuring
@@ -13,6 +15,8 @@ function Header() {
   const [smallScreen, setSmallScreen] = useState(false); // to test screen size
   const [searchInput, setSearch] = useState("");
   let history = useHistory();
+
+  const user = useCustomSelector(selectUser);
 
   // test if we > || < 900px
   useEffect(() => {
@@ -70,39 +74,19 @@ function Header() {
                 Top streams
               </Link>
             </li>
-            <li className="linkNav">
-              <form className="formSubmit" onSubmit={handleSubmit}>
-                <input
-                  required
-                  value={searchInput}
-                  onChange={(e) => handleKeyPress(e)}
-                  type="text"
-                  className="inputSearch"
-                />
-                <Link
-                  className="link"
-                  to={{
-                    pathname: `/results/${searchInput}`,
-                  }}
-                >
-                  <button type="submit">
-                    <img
-                      src={search}
-                      alt="magnifier icon"
-                      className="logoMagnifier"
-                    />
-                  </button>
-                </Link>
-              </form>
-            </li>
             <li onClick={hideMenu} className="linkNav">
-              <Link className="link" to="/sign-in">
-                Log In
+              <Link className="link" to="/posts">
+                Top Blogs
               </Link>
             </li>
-            <li onClick={hideMenu} className="linkNav">
-              <Button onClick={handleButtonClick} className="btn-icon btn-3" size="sm" color="primary" >Sign Up</Button>
-            </li>
+            {user ? (
+              <NavbarDropdown hideMenu={hideMenu} />
+            ) : (
+              <AuthButtons
+                hideMenu={hideMenu}
+                buttonClick={handleButtonClick}
+              />
+            )}
           </ul>
         )}
         {/* \ Conditionnal rendering for menu */}
